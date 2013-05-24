@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{19E0AF26-8626-4254-829D-46FEE6BB4EA7}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Bygfoot.Net</RootNamespace>
+    <AssemblyName>Bygfoot.Net</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="AppWindow.cs" />
+    <Compile Include="Bygfoot.cs" />
+    <Compile Include="Debug.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="FileHelper.cs" />
+    <Compile Include="GameGUI.cs" />
+    <Compile Include="GladeHelper.cs" />
+    <Compile Include="Language.cs" />
+    <Compile Include="LoadSave.cs" />
+    <Compile Include="Option.cs" />
+    <Compile Include="OptionStruct.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="SplashWindow.cs" />
+    <Compile Include="StartupWindow.cs" />
+    <Compile Include="Support.cs" />
+    <Compile Include="TreeViewHelper.cs" />
+    <Compile Include="Variables.cs" />
+    <Compile Include="WarningWindow.cs" />
+    <Compile Include="XmlHelper.cs" />
+    <Compile Include="Objects\Bet.cs" />
+    <Compile Include="Objects\Country.cs" />
+    <Compile Include="Objects\Cup.cs" />
+    <Compile Include="Objects\Fixture.cs" />
+    <Compile Include="Objects\Job.cs" />
+    <Compile Include="Objects\LGCommentary.cs" />
+    <Compile Include="Objects\League.cs" />
+    <Compile Include="Objects\LiveGame.cs" />
+    <Compile Include="Objects\NameList.cs" />
+    <Compile Include="Objects\NewsArticle.cs" />
+    <Compile Include="Objects\Player.cs" />
+    <Compile Include="Objects\Stat.cs" />
+    <Compile Include="Objects\Strategy.cs" />
+    <Compile Include="Objects\Table.cs" />
+    <Compile Include="Objects\Team.cs" />
+    <Compile Include="Objects\Transfer.cs" />
+    <Compile Include="Objects\User.cs" />
+    <Compile Include="Objects\YouthAcademy.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Objects\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Private>False</Private>
+      <Package>gtk-sharp-2.0</Package>
+    </Reference>
+    <Reference Include="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Private>False</Private>
+      <Package>glade-sharp-2.0</Package>
+    </Reference>
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Private>False</Private>
+      <Package>glib-sharp-2.0</Package>
+    </Reference>
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Private>False</Private>
+      <Package>gtk-sharp-2.0</Package>
+    </Reference>
+    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Private>False</Private>
+      <Package>gtk-sharp-2.0</Package>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Private>False</Private>
+      <Package>gtk-sharp-2.0</Package>
+    </Reference>
+    <Reference Include="Mono.Posix" />
+    <Reference Include="NDesk.Options">
+      <HintPath>..\packages\NDesk.Options\NDesk.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+</Project>

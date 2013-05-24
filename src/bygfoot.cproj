@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{33CA070F-9DD4-43B2-9455-995F9760229C}</ProjectGuid>
+    <Compiler>
+      <Compiler ctype="GccCompiler" />
+    </Compiler>
+    <Language>C</Language>
+    <Target>Bin</Target>
+    <Packages>
+      <Packages>
+        <Package file="/usr/lib/x86_64-linux-gnu/pkgconfig/gtk+-2.0.pc" name="GTK+" IsProject="False" />
+        <Package file="/usr/lib/x86_64-linux-gnu/pkgconfig/gdk-2.0.pc" name="GDK" IsProject="False" />
+        <Package file="/usr/lib/x86_64-linux-gnu/pkgconfig/atk.pc" name="Atk" IsProject="False" />
+        <Package file="/usr/lib/x86_64-linux-gnu/pkgconfig/gio-2.0.pc" name="GIO" IsProject="False" />
+        <Package file="/usr/lib/x86_64-linux-gnu/pkgconfig/pangoft2.pc" name="Pango FT2 and Pango Fc" IsProject="False" />
+        <Package file="/usr/lib/x86_64-linux-gnu/pkgconfig/pangocairo.pc" name="Pango Cairo" IsProject="False" />
+        <Package file="/usr/lib/x86_64-linux-gnu/pkgconfig/cairo.pc" name="cairo" IsProject="False" />
+        <Package file="/usr/lib/x86_64-linux-gnu/pkgconfig/gobject-2.0.pc" name="GObject" IsProject="False" />
+        <Package file="/usr/lib/x86_64-linux-gnu/pkgconfig/fontconfig.pc" name="Fontconfig" IsProject="False" />
+        <Package file="/usr/lib/x86_64-linux-gnu/pkgconfig/pango.pc" name="Pango" IsProject="False" />
+        <Package file="/usr/lib/x86_64-linux-gnu/pkgconfig/gmodule-2.0.pc" name="GModule" IsProject="False" />
+        <Package file="/usr/lib/x86_64-linux-gnu/pkgconfig/glib-2.0.pc" name="GLib" IsProject="False" />
+        <Package file="/usr/lib/x86_64-linux-gnu/pkgconfig/zlib.pc" name="zlib" IsProject="False" />
+      </Packages>
+    </Packages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug</OutputPath>
+    <OutputName>bygfoot</OutputName>
+    <CompileTarget>Bin</CompileTarget>
+    <DefineSymbols>DEBUG MONODEVELOP</DefineSymbols>
+    <SourceDirectory>.</SourceDirectory>
+    <Includes>
+      <Includes>
+        <Include>${CombineDir}</Include>
+      </Includes>
+    </Includes>
+    <ExtraCompilerArguments>-DGETTEXT_PACKAGE=\""bygfoot"\" -DPACKAGE_DATA_DIR=\""../.."\" -DPACKAGE=\"".."\"</ExtraCompilerArguments>
+    <ExtraLinkerArguments>-lm</ExtraLinkerArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release</OutputPath>
+    <OutputName>bygfoot</OutputName>
+    <CompileTarget>Bin</CompileTarget>
+    <OptimizationLevel>3</OptimizationLevel>
+    <DefineSymbols>MONODEVELOP</DefineSymbols>
+    <SourceDirectory>.</SourceDirectory>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="zip\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="bet.c" />
+    <Compile Include="callback_func.c" />
+    <Compile Include="callbacks.c" />
+    <Compile Include="cup.c" />
+    <Compile Include="debug.c" />
+    <Compile Include="file.c" />
+    <Compile Include="finance.c" />
+    <Compile Include="fixture.c" />
+    <Compile Include="free.c" />
+    <Compile Include="game.c" />
+    <Compile Include="game_gui.c" />
+    <Compile Include="gui.c" />
+    <Compile Include="interface.c" />
+    <Compile Include="job.c" />
+    <Compile Include="language.c" />
+    <Compile Include="league.c" />
+    <Compile Include="league_table_callbacks.c" />
+    <Compile Include="lg_commentary.c" />
+    <Compile Include="live_game.c" />
+    <Compile Include="load_save.c" />
+    <Compile Include="main.c" />
+    <Compile Include="maths.c" />
+    <Compile Include="misc.c" />
+    <Compile Include="misc2_callback_func.c" />
+    <Compile Include="misc2_callbacks.c" />
+    <Compile Include="misc2_interface.c" />
+    <Compile Include="misc3_callbacks.c" />
+    <Compile Include="misc3_interface.c" />
+    <Compile Include="misc_callback_func.c" />
+    <Compile Include="misc_callbacks.c" />
+    <Compile Include="misc_interface.c" />
+    <Compile Include="name.c" />
+    <Compile Include="news.c" />
+    <Compile Include="nonsourcestrings.c" />
+    <Compile Include="option.c" />
+    <Compile Include="option_gui.c" />
+    <Compile Include="options_callbacks.c" />
+    <Compile Include="options_interface.c" />
+    <Compile Include="player.c" />
+    <Compile Include="start_end.c" />
+    <Compile Include="stat.c" />
+    <Compile Include="strategy.c" />
+    <Compile Include="support.c" />
+    <Compile Include="table.c" />
+    <Compile Include="team.c" />
+    <Compile Include="training.c" />
+    <Compile Include="training_callbacks.c" />
+    <Compile Include="training_interface.c" />
+    <Compile Include="transfer.c" />
+    <Compile Include="treeview.c" />
+    <Compile Include="treeview2.c" />
+    <Compile Include="treeview_helper.c" />
+    <Compile Include="user.c" />
+    <Compile Include="window.c" />
+    <Compile Include="xml.c" />
+    <Compile Include="xml_country.c" />
+    <Compile Include="xml_cup.c" />
+    <Compile Include="xml_league.c" />
+    <Compile Include="xml_lg_commentary.c" />
+    <Compile Include="xml_loadsave_cup.c" />
+    <Compile Include="xml_loadsave_fixtures.c" />
+    <Compile Include="xml_loadsave_jobs.c" />
+    <Compile Include="xml_loadsave_league.c" />
+    <Compile Include="xml_loadsave_league_stat.c" />
+    <Compile Include="xml_loadsave_leagues_cups.c" />
+    <Compile Include="xml_loadsave_live_game.c" />
+    <Compile Include="xml_loadsave_misc.c" />
+    <Compile Include="xml_loadsave_newspaper.c" />
+    <Compile Include="xml_loadsave_players.c" />
+    <Compile Include="xml_loadsave_season_stats.c" />
+    <Compile Include="xml_loadsave_table.c" />
+    <Compile Include="xml_loadsave_teams.c" />
+    <Compile Include="xml_loadsave_transfers.c" />
+    <Compile Include="xml_loadsave_users.c" />
+    <Compile Include="xml_mmatches.c" />
+    <Compile Include="xml_name.c" />
+    <Compile Include="xml_news.c" />
+    <Compile Include="xml_strategy.c" />
+    <Compile Include="xml_team.c" />
+    <Compile Include="youth_academy.c" />
+    <Compile Include="zip\unzip.c" />
+    <Compile Include="zip\zip.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bet.h" />
+    <None Include="bet_struct.h" />
+    <None Include="bygfoot.h" />
+    <None Include="bygfoot.ico" />
+    <None Include="bygfoot_private.h" />
+    <None Include="bygfoot_private.rc" />
+    <None Include="callback_func.h" />
+    <None Include="callbacks.h" />
+    <None Include="cup.h" />
+    <None Include="cup_struct.h" />
+    <None Include="debug.h" />
+    <None Include="enums.h" />
+    <None Include="file.h" />
+    <None Include="finance.h" />
+    <None Include="fixture.h" />
+    <None Include="fixture_struct.h" />
+    <None Include="free.h" />
+    <None Include="game.h" />
+    <None Include="game_gui.h" />
+    <None Include="gettext_macros.h" />
+    <None Include="gui.h" />
+    <None Include="interface.h" />
+    <None Include="job.h" />
+    <None Include="job_struct.h" />
+    <None Include="language.h" />
+    <None Include="league.h" />
+    <None Include="league_struct.h" />
+    <None Include="league_table_callbacks.h" />
+    <None Include="lg_commentary.h" />
+    <None Include="lg_commentary_struct.h" />
+    <None Include="live_game.h" />
+    <None Include="live_game_struct.h" />
+    <None Include="load_save.h" />
+    <None Include="main.h" />
+    <None Include="maths.h" />
+    <None Include="misc.h" />
+    <None Include="misc2_callback_func.h" />
+    <None Include="misc2_callbacks.h" />
+    <None Include="misc2_interface.h" />
+    <None Include="misc3_callbacks.h" />
+    <None Include="misc3_interface.h" />
+    <None Include="misc_callback_func.h" />
+    <None Include="misc_callbacks.h" />
+    <None Include="misc_interface.h" />
+    <None Include="name.h" />
+    <None Include="name_struct.h" />
+    <None Include="news.h" />
+    <None Include="news_struct.h" />
+    <None Include="option.h" />
+    <None Include="option_gui.h" />
+    <None Include="option_struct.h" />
+    <None Include="options_callbacks.h" />
+    <None Include="options_interface.h" />
+    <None Include="player.h" />
+    <None Include="player_struct.h" />
+    <None Include="start_end.h" />
+    <None Include="stat.h" />
+    <None Include="stat_struct.h" />
+    <None Include="strategy.h" />
+    <None Include="strategy_struct.h" />
+    <None Include="support.h" />
+    <None Include="table.h" />
+    <None Include="table_struct.h" />
+    <None Include="team.h" />
+    <None Include="team_struct.h" />
+    <None Include="training.h" />
+    <None Include="training_callbacks.h" />
+    <None Include="training_interface.h" />
+    <None Include="training_struct.h" />
+    <None Include="transfer.h" />
+    <None Include="transfer_struct.h" />
+    <None Include="treeview.h" />
+    <None Include="treeview2.h" />
+    <None Include="treeview_helper.h" />
+    <None Include="user.h" />
+    <None Include="user_struct.h" />
+    <None Include="variables.h" />
+    <None Include="window.h" />
+    <None Include="xml.h" />
+    <None Include="xml_country.h" />
+    <None Include="xml_cup.h" />
+    <None Include="xml_league.h" />
+    <None Include="xml_lg_commentary.h" />
+    <None Include="xml_loadsave_cup.h" />
+    <None Include="xml_loadsave_fixtures.h" />
+    <None Include="xml_loadsave_jobs.h" />
+    <None Include="xml_loadsave_league.h" />
+    <None Include="xml_loadsave_league_stat.h" />
+    <None Include="xml_loadsave_leagues_cups.h" />
+    <None Include="xml_loadsave_live_game.h" />
+    <None Include="xml_loadsave_misc.h" />
+    <None Include="xml_loadsave_newspaper.h" />
+    <None Include="xml_loadsave_players.h" />
+    <None Include="xml_loadsave_season_stats.h" />
+    <None Include="xml_loadsave_table.h" />
+    <None Include="xml_loadsave_teams.h" />
+    <None Include="xml_loadsave_transfers.h" />
+    <None Include="xml_loadsave_users.h" />
+    <None Include="xml_mmatches.h" />
+    <None Include="xml_name.h" />
+    <None Include="xml_news.h" />
+    <None Include="xml_strategy.h" />
+    <None Include="xml_team.h" />
+    <None Include="youth_academy.h" />
+    <None Include="youth_academy_struct.h" />
+    <None Include="zip\unzip.h" />
+    <None Include="zip\zip.h" />
+  </ItemGroup>
+</Project>

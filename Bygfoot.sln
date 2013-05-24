@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2857B73E-F847-4B02-9238-064979017E93}") = "bygfoot", "src\bygfoot.cproj", "{33CA070F-9DD4-43B2-9455-995F9760229C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bygfoot.Net", "cs\Bygfoot.Net.csproj", "{19E0AF26-8626-4254-829D-46FEE6BB4EA7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{19E0AF26-8626-4254-829D-46FEE6BB4EA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19E0AF26-8626-4254-829D-46FEE6BB4EA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19E0AF26-8626-4254-829D-46FEE6BB4EA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19E0AF26-8626-4254-829D-46FEE6BB4EA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33CA070F-9DD4-43B2-9455-995F9760229C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33CA070F-9DD4-43B2-9455-995F9760229C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33CA070F-9DD4-43B2-9455-995F9760229C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33CA070F-9DD4-43B2-9455-995F9760229C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = cs\Bygfoot.Net.csproj
+	EndGlobalSection
+EndGlobal
