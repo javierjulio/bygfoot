@@ -2,6 +2,7 @@
 *~
 
 #build stuff
+bin/
 obj/
 
 # globs
@@ -22,3 +23,7 @@ autom4te.cache/
 *.tar.gz
 tarballs/
 test-results/
+
+# updated glade files
+*.mono.glade
+*.processed
