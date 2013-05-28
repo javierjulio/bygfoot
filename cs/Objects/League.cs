@@ -98,6 +98,8 @@ namespace bygfoot
 
 	public class League
 	{
+		public const string TAG_TEAMS = "teams";
+
 		/** Default value "" */
 		public string name = string.Empty;
 		public string shortName = string.Empty;
@@ -133,7 +135,7 @@ namespace bygfoot
 		public float averageTalent = -1;
 		/** Array of teams in the league.
 		 * @see Team */
-		public List<Team> teams;
+		public List<Team> teams = new List<Team>();
 		/** List of leagues joined fixture-wise to this one.
 		 * @see JoinedLeague */
 		public List<JoinedLeague> joinedLeagues;
@@ -179,11 +181,18 @@ namespace bygfoot
 			XmlNode xnName = xnLeague.SelectSingleNode (XmlHelper.TAG_DEF_NAME);
 			name = xnName.InnerText;
 			XmlNode xnShortName = xnLeague.SelectSingleNode (XmlHelper.TAG_DEF_SHORT_NAME);
-			shortName = xnName.InnerText;
+			shortName = xnShortName.InnerText;
 			XmlNode xnSid = xnLeague.SelectSingleNode (XmlHelper.TAG_DEF_SID);
 			sid = xnSid.InnerText;
 			XmlNode xnSymbol = xnLeague.SelectSingleNode (XmlHelper.TAG_DEF_SYMBOL);
 			symbol = xnSymbol.InnerText;
+
+			XmlNode xnTeams = xnLeague.SelectSingleNode (TAG_TEAMS);
+			foreach (XmlNode xnTeam in xnTeams.ChildNodes) {
+				Team team = new Team ();
+				team.Load (xnTeam);
+				teams.Add (team);
+			}
 		}
 	}
 }

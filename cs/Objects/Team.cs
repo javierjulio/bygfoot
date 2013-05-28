@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Xml;
 
 namespace bygfoot
 {
@@ -59,6 +60,21 @@ namespace bygfoot
 	 * @see Player */
 	public class Team
 	{
+		public const string TAG_TEAM = "team";
+		public const string TAG_TEAM_NAME = "team_name";
+		public const string TAG_STADIUM_NAME = "stadium_name";
+		public const string TAG_SYMBOL = "symbol";
+		public const string TAG_AVERAGE_TALENT = "average_talent";
+		public const string TAG_FORMATION = "formation";
+		public const string TAG_NAMES_FILE = "names_file";
+		public const string TAG_PLAYER = "player";
+		public const string TAG_PLAYER_NAME = "player_name";
+		public const string TAG_PLAYER_BIRTH_YEAR = "birth_year";
+		public const string TAG_PLAYER_BIRTH_MONTH = "birth_month";
+		public const string TAG_PLAYER_SKILL = "skill";
+		public const string TAG_PLAYER_TALENT = "talent";
+		public const string TAG_PLAYER_POSITION = "position";
+
 		public string name;
 		public string symbol;
 		/** File the team takes the 
@@ -87,6 +103,16 @@ namespace bygfoot
 		 * Array of players.
 		 * */
 		public List<Player> Players { get; set; }
+
+		public Team()
+		{
+		}
+
+		public void Load(XmlNode xnTeam)
+		{
+			XmlNode xnTeamName = xnTeam.SelectSingleNode (TAG_TEAM_NAME);
+			name = xnTeamName.InnerText;
+		}
 	}
 }
 

@@ -20,8 +20,8 @@ namespace bygfoot
 		public string sid;
 		public int rating;
 
-		public List<League> leagues;
-		public List<Cup> cups;
+		public List<League> leagues = new List<League>();
+		public List<Cup> cups = new List<Cup>();
 		
 		public List<Cup> allcups;
 
@@ -46,19 +46,21 @@ namespace bygfoot
 			XmlNode xnSymbol = xnCountry.SelectSingleNode (XmlHelper.TAG_DEF_SYMBOL);
 			symbol = xnSymbol.InnerText;
 			XmlNode xnSid = xnCountry.SelectSingleNode (XmlHelper.TAG_DEF_SID);
-			sid = xnSymbol.InnerText;
+			sid = xnSid.InnerText;
 			XmlNode xnRating = xnCountry.SelectSingleNode (TAG_RATING);
 			rating = Convert.ToInt32 (xnRating.InnerText);
 			XmlNode xnLeagues = xnCountry.SelectSingleNode (TAG_LEAGUES);
 			foreach (XmlNode xnLeague in xnLeagues.ChildNodes) {
 				League league = new League ();
 				league.Load (xnLeague.InnerText);
+				leagues.Add (league);
 			}
 
 			XmlNode xnCups = xnCountry.SelectSingleNode (TAG_CUPS);
 			foreach (XmlNode xnCup in xnCups.ChildNodes) {
 				Cup cup = new Cup();
 				cup.Load (xnCup.InnerText);
+				cups.Add (cup);
 			}
 		}
 	}

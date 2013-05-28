@@ -11,6 +11,9 @@ namespace bygfoot
 		static Window window_startup = null;
 
 		[Glade.Widget]
+		static TreeView treeview_startup = null;
+
+		[Glade.Widget]
 		static ComboBox combo_country = null;
 
 		public static Window Create()
@@ -75,6 +78,7 @@ namespace bygfoot
 			Console.WriteLine("ShowTeamList");
 #endif
 			xml_read_country (countryName, null);
+			TreeViewHelper.ShowTeamList (treeview_startup, false, false);
 		}
 
 		public static void xml_read_country(string countryName, Country countryArg)
