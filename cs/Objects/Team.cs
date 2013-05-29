@@ -113,6 +113,18 @@ namespace bygfoot
 			XmlNode xnTeamName = xnTeam.SelectSingleNode (TAG_TEAM_NAME);
 			name = xnTeamName.InnerText;
 		}
+
+		public bool IsUserTeam()
+		{
+#if DEBUG
+			Console.WriteLine("Team.IsUserTeam");
+#endif
+			for (int i = 0; i < Variables.Users.Count; i++) {
+				if (Variables.Users [i].TeamId == this.id)
+					return true;
+			}
+			return false;
+		}
 	}
 }
 

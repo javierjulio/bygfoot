@@ -13,7 +13,7 @@ namespace bygfoot
 		 */
 		public static Country Country = new Country();
 		/** The array of human players. @see #User */
-		public static ArrayList Users;
+		public static List<User> Users = new List<User>();
 		/** The season, week and week round numbers.
 		 * We keep track of the time in the game with these variables. */
 		public static int Season;

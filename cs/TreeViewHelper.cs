@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using Gtk;
+using Gdk;
 using Mono.Unix;
 
 namespace bygfoot
@@ -63,6 +64,22 @@ namespace bygfoot
 			return renderer;
 		}
 
+		/** Return a new pixbuf created from the specified filename.
+		 * @param filename Name of a pixmap file located in one of the support directories.
+		 * @return A new pixbuf or NULL on error.
+		 **/
+		public static Pixbuf PixbufFromFilename(string filename)
+		{
+			Pixbuf symbol = null;
+			if (!string.IsNullOrEmpty (filename)) {
+				string symbolFile = FileHelper.FindSupportFile (filename, false);
+				if (!string.IsNullOrEmpty (symbolFile)) {
+					symbol = new Pixbuf (symbolFile);
+				}
+			}
+			return symbol;
+		}
+
 		/** Create the model for the startup country files combo.
 		 * @param countryList The List of country files found */
 		public static TreeModel CreateCountryList(string[] countryList)
@@ -70,7 +87,7 @@ namespace bygfoot
 #if DEBUG
 			Console.WriteLine("TreeViewHelper.CreateCountryList");
 #endif
-			TreeStore ls = new TreeStore(typeof(Gdk.Pixbuf), typeof(string));
+			TreeStore ls = new TreeStore(typeof(Pixbuf), typeof(string));
 			TreeIter iterContinent;
 			string currentContinent = string.Empty;
 			foreach (string country in countryList) {
@@ -82,8 +99,9 @@ namespace bygfoot
 					currentContinent = continent;
 				}
 
+				Pixbuf flag = PixbufFromFilename (string.Format ("flag_{0}.png", elements [1]));
 				TreeIter iterCountry = ls.AppendNode (iterContinent);
-				ls.SetValue(iterCountry, 1, elements[1]);
+				ls.SetValues(iterCountry, flag, elements[1]);
 			}
 			return ls;
 		}
@@ -109,10 +127,11 @@ namespace bygfoot
 				League league = country.leagues [i];
 				for (int j = 0; j < league.teams.Count; j++) {
 					Team team = league.teams [j];
-					//if (team_is_user (team, Team) == -1)
+					if (!team.IsUserTeam())
 					{
+						Pixbuf symbol = PixbufFromFilename (!string.IsNullOrEmpty (team.symbol) ? team.symbol : league.symbol);
 						TreeIter iter = ls.AppendNode();
-						ls.SetValues (iter, count++, league.symbol, team, league.name, team);
+						ls.SetValues (iter, count++, symbol, team, league.name, team);
 					}
 				}
 			}
