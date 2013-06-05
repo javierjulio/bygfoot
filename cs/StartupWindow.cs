@@ -16,6 +16,12 @@ namespace bygfoot
 		[Glade.Widget]
 		static ComboBox combo_country = null;
 
+		[Glade.Widget]
+		static ComboBox combobox_start_league = null;
+
+		[Glade.Widget]
+		static Button button_add_player = null;
+
 		public static Window Create()
 		{
 			Support.LoadUI("bygfoot_misc.glade", "window_startup", typeof(StartupWindow));
@@ -79,6 +85,27 @@ namespace bygfoot
 #endif
 			xml_read_country (countryName, null);
 			TreeViewHelper.ShowTeamList (treeview_startup, false, false);
+			ShowLeaguesCombo ();
+			button_add_player.Sensitive = true;
+		}
+
+		/** Show the league list in the combo box
+		 * in the startup window. */
+		public static void ShowLeaguesCombo()
+		{
+#if DEBUG
+			Console.WriteLine("ShowLeaguesCombo");
+#endif
+			combobox_start_league.Clear ();
+			combobox_start_league.RemoveText (1);
+
+			CellRenderer renderer = TreeViewHelper.TextCellRenderer ();
+			combobox_start_league.PackStart (renderer, false);
+			combobox_start_league.SetAttributes (renderer, "text", 0);
+
+			TreeModel model = TreeViewHelper.CreateLeagueList (Variables.Country);
+			combobox_start_league.Model = model;
+			combobox_start_league.Active = 0;
 		}
 
 		public static void xml_read_country(string countryName, Country countryArg)
@@ -96,6 +123,7 @@ namespace bygfoot
 				Option.SettingInt("int_opt_disable_ya", 0);
 				Option.SettingInt("int_opt_disable_training_camp", 0); //***ML***
 			}
+			country.leagues.Clear ();
 			country.Load (countryName);
 		}
 
@@ -114,7 +142,14 @@ namespace bygfoot
 #if DEBUG
 			Console.WriteLine("on_combo_country_changed");
 #endif
-
+			TreeIter iter;
+			combo_country.GetActiveIter (out iter);
+			if (!combo_country.Model.IterHasChild (iter)) {
+				string country = combo_country.Model.GetValue (iter, 1).ToString ();
+				ShowTeamList (country);
+			} else {
+				button_add_player.Sensitive = false;
+			}
 		}
 
 		public static void on_treeview_users_button_press_event(object sender, ButtonPressEventArgs e)

@@ -80,6 +80,21 @@ namespace bygfoot
 			return symbol;
 		}
 
+		public static TreeModel CreateLeagueList(Country country)
+		{
+#if DEBUG
+			Console.WriteLine("TreeViewHelper.CreateLeagueList");
+#endif
+			TreeStore ls = new TreeStore (typeof(string));
+			TreeIter iter = ls.AppendNode ();
+			ls.SetValue (iter, 0, Catalog.GetString ("Current league"));
+			foreach (League league in country.leagues) {
+				iter = ls.AppendNode ();
+				ls.SetValue (iter, 0, league.name);
+			}
+			return ls;
+		}
+
 		/** Create the model for the startup country files combo.
 		 * @param countryList The List of country files found */
 		public static TreeModel CreateCountryList(string[] countryList)
@@ -213,7 +228,7 @@ namespace bygfoot
 			TreeModel model = CreateTeamSelectionList (Variables.Country, showCupTeams, showUserTeams);
 			TreePath path = new TreePath ("0");
 
-			//treeview_helper_clear(treeview);
+			Clear (treeview);
 
 			SetupTeamSelectionTreeview (treeview);
 			treeview.Model = model;
@@ -246,6 +261,24 @@ namespace bygfoot
 #endif
 			Team team = (Team)model.GetValue (iter, 4);
 			(cell as CellRendererText).Text = team.AverageTalent.ToString ();
+		}
+
+		/**
+		 * Removes all columns from a GTK treeview. I didn't find a better way
+		 * to completely clear a treeview :-/.
+		 * @param treeview The pointer to the treeview widget we'd like to clear.
+		 **/
+		public static void Clear(TreeView treeview)
+		{
+#if DEBUG
+			Console.WriteLine("TreeViewHelper.Clear");
+#endif
+			if (treeview != null) {
+				for (int i = treeview.Columns.Length - 1; i >= 0; i--) {
+					treeview.RemoveColumn(treeview.Columns[i]);
+				}
+				treeview.Model = null;
+			}
 		}
 	}
 }
