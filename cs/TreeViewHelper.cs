@@ -7,8 +7,254 @@ using Mono.Unix;
 
 namespace bygfoot
 {
-	public class TreeViewHelper
+	public partial class TreeViewHelper
 	{
+		/** Select the row that's been clicked on. */
+		public static bool SelectRow(TreeView treeview, EventButton btnEvent)
+		{
+#if DEBUG
+			Console.WriteLine("TreeViewHelper.SelectRow");
+#endif
+			// TODO
+			return true;
+		}
+
+		/** Return the number in the 'column'th column of the currently
+		 * selected row of the treeview.
+		 * @param treeview The treeview argument.
+		 * @param column The column we'd like to get the contents of.
+		 * @return The number in the given column of the selected row.
+		 **/
+		public static int GetIndex(TreeView treeview, int column)
+		{
+#if DEBUG
+			Console.WriteLine("TreeViewHelper.GetIndex");
+#endif
+			TreeSelection selection = treeview.Selection;
+			TreeIter iter;
+			selection.GetSelected (out iter);
+			int value = -1;
+			Int32.TryParse (treeview.Model.GetValue (iter, column).ToString(), out value);
+			return value;
+		}
+
+		/** Return the pointer in the 'column'th column of the currently
+		 * selected row of the treeview.
+		 * @param treeview The treeview argument.
+		 * @param column The column we'd like to get the content of.
+		 * @return The pointer in the given column of the selected row.
+		 **/
+		public static object GetPointer(TreeView treeview, int column)
+		{
+#if DEBUG
+			Console.WriteLine("TreeViewHelper.GetPointer");
+#endif
+			TreeSelection selection = treeview.Selection;
+			TreeIter iter;
+			selection.GetSelected (out iter);
+			return treeview.Model.GetValue (iter, column);
+		}
+
+		/**
+		 * Removes all columns from a GTK treeview. I didn't find a better way
+		 * to completely clear a treeview :-/.
+		 * @param treeview The pointer to the treeview widget we'd like to clear.
+		 **/
+		public static void Clear(TreeView treeview)
+		{
+#if DEBUG
+			Console.WriteLine("TreeViewHelper.Clear");
+#endif
+			if (treeview != null) {
+				for (int i = treeview.Columns.Length - 1; i >= 0; i--) {
+					treeview.RemoveColumn(treeview.Columns[i]);
+				}
+				treeview.Model = null;
+			}
+		}
+
+		/** Return number of given column or -1 if not found or on error.
+		 * @param col The column pointer.
+		 * @return The index of the column within the treeview. */
+		public static int GetColumnNumber(TreeViewColumn column)
+		{
+#if DEBUG
+			Console.WriteLine("TreeviewHelper.GetColumnNumber");
+#endif
+			if (column != null && column.TreeView != null) {
+				// TODO
+			}
+			return -1;
+		}
+
+		/** Return the row index of the iter in the model. 
+		 * Since we only work with flat models (no children),
+		 * the path is a single number. */
+		public static int IterGetRow(TreeModel model, TreeIter iter)
+		{
+#if DEBUG
+			Console.WriteLine("TreeviewHelper.IterGetRow");
+#endif
+			string path = model.GetStringFromIter (iter);
+			//gint row_idx = (gint)g_ascii_strtod(path, NULL); // Is following correct?
+			int rowIndex = -1;
+			Int32.TryParse (path, out rowIndex);
+			return rowIndex;
+		}
+
+		/** Return a cell renderer with font name set
+		 * according to the font option. */
+		public static CellRenderer TextCellRenderer()
+		{
+			CellRendererText renderer = new CellRendererText();
+
+			string fontName = Option.OptStr("string_opt_font_name");
+			if (!string.IsNullOrEmpty(fontName))
+				renderer.Font = fontName;
+
+			return renderer;
+		}
+
+		/** Return the filename of the icon going with the LiveGameEvent
+		 * with type event_type.
+		 * @param event_type The type of the event.
+		 * @return A filename specifying a pixmap. */
+		public static string LiveGameIcon(LiveGameEventType eventType)
+		{
+#if DEBUG
+			Console.WriteLine("TreeviewHelper.LiveGameIcon");
+#endif
+			if(eventType == LiveGameEventType.LIVE_GAME_EVENT_START_MATCH ||
+			   eventType == LiveGameEventType.LIVE_GAME_EVENT_END_MATCH ||
+			   eventType == LiveGameEventType.LIVE_GAME_EVENT_HALF_TIME ||
+			   eventType == LiveGameEventType.LIVE_GAME_EVENT_EXTRA_TIME ||
+			   eventType == LiveGameEventType.LIVE_GAME_EVENT_PENALTIES)
+				return Option.ConstApp("string_live_game_event_start_match_icon");
+			else if(eventType == LiveGameEventType.LIVE_GAME_EVENT_LOST_POSSESSION)
+				return Option.ConstApp("string_live_game_event_lost_possession_icon");
+			else if(eventType == LiveGameEventType.LIVE_GAME_EVENT_PENALTY)
+				return Option.ConstApp("string_live_game_event_penalty_icon");
+			else if(eventType == LiveGameEventType.LIVE_GAME_EVENT_SCORING_CHANCE ||
+			        eventType == LiveGameEventType.LIVE_GAME_EVENT_FREE_KICK)
+				return Option.ConstApp("string_live_game_event_scoring_chance_icon");
+			else if(eventType == LiveGameEventType.LIVE_GAME_EVENT_HEADER)
+				return Option.ConstApp("string_live_game_event_header_icon");
+			else if(eventType == LiveGameEventType.LIVE_GAME_EVENT_GOAL)
+				return Option.ConstApp("string_live_game_event_goal_icon");
+			else if(eventType == LiveGameEventType.LIVE_GAME_EVENT_OWN_GOAL)
+				return Option.ConstApp("string_live_game_event_own_goal_icon");
+			else if(eventType == LiveGameEventType.LIVE_GAME_EVENT_POST)
+				return Option.ConstApp("string_live_game_event_post_icon");
+			else if(eventType == LiveGameEventType.LIVE_GAME_EVENT_CROSS_BAR)
+				return Option.ConstApp("string_live_game_event_cross_bar_icon");
+			else if(eventType == LiveGameEventType.LIVE_GAME_EVENT_SAVE)
+				return Option.ConstApp("string_live_game_event_save_icon");
+			else if(eventType == LiveGameEventType.LIVE_GAME_EVENT_MISS)
+				return Option.ConstApp("string_live_game_event_miss_icon");
+			else if(eventType == LiveGameEventType.LIVE_GAME_EVENT_FOUL)
+				return Option.ConstApp("string_live_game_event_foul_icon");
+			else if(eventType == LiveGameEventType.LIVE_GAME_EVENT_FOUL_YELLOW)
+				return Option.ConstApp("string_live_game_event_foul_yellow_icon");
+			else if(eventType == LiveGameEventType.LIVE_GAME_EVENT_SEND_OFF ||
+			        eventType == LiveGameEventType.LIVE_GAME_EVENT_FOUL_RED ||
+			        eventType == LiveGameEventType.LIVE_GAME_EVENT_FOUL_RED_INJURY)
+				return Option.ConstApp("string_live_game_event_send_off_icon");
+			else if(eventType == LiveGameEventType.LIVE_GAME_EVENT_INJURY)
+				return Option.ConstApp("string_live_game_event_injury_icon");
+			else if(eventType == LiveGameEventType.LIVE_GAME_EVENT_TEMP_INJURY)
+				return Option.ConstApp("string_live_game_event_temp_injury_icon");
+			else if(eventType == LiveGameEventType.LIVE_GAME_EVENT_STADIUM_BREAKDOWN)
+				return Option.ConstApp("string_live_game_event_stadium_breakdown_icon");
+			else if(eventType == LiveGameEventType.LIVE_GAME_EVENT_STADIUM_FIRE)
+				return Option.ConstApp("string_live_game_event_stadium_fire_icon");
+			else if(eventType == LiveGameEventType.LIVE_GAME_EVENT_STADIUM_RIOTS)
+				return Option.ConstApp("string_live_game_event_stadium_riots_icon");
+			else if(eventType == LiveGameEventType.LIVE_GAME_EVENT_SUBSTITUTION)
+				return Option.ConstApp("string_live_game_event_substitution_icon");
+			else if(eventType == LiveGameEventType.LIVE_GAME_EVENT_STRUCTURE_CHANGE)
+				return Option.ConstApp("string_live_game_event_structure_change_icon");
+			else if(eventType == LiveGameEventType.LIVE_GAME_EVENT_STYLE_CHANGE_ALL_OUT_DEFEND)
+				return Option.ConstApp("string_game_gui_style_all_out_defend_icon");
+			else if(eventType == LiveGameEventType.LIVE_GAME_EVENT_STYLE_CHANGE_DEFEND)
+				return Option.ConstApp("string_game_gui_style_defend_icon");
+			else if(eventType == LiveGameEventType.LIVE_GAME_EVENT_STYLE_CHANGE_BALANCED)
+				return Option.ConstApp("string_game_gui_style_balanced_icon");
+			else if(eventType == LiveGameEventType.LIVE_GAME_EVENT_STYLE_CHANGE_ATTACK)
+				return Option.ConstApp("string_game_gui_style_attack_icon");
+			else if(eventType == LiveGameEventType.LIVE_GAME_EVENT_STYLE_CHANGE_ALL_OUT_ATTACK)
+				return Option.ConstApp("string_game_gui_style_all_out_attack_icon");
+			else if(eventType == LiveGameEventType.LIVE_GAME_EVENT_BOOST_CHANGE_ANTI)
+				return Option.ConstApp("string_game_gui_boost_anti_icon");
+			else if(eventType == LiveGameEventType.LIVE_GAME_EVENT_BOOST_CHANGE_OFF)
+				return Option.ConstApp("string_game_gui_boost_off_icon");
+			else if(eventType == LiveGameEventType.LIVE_GAME_EVENT_BOOST_CHANGE_ON)
+				return Option.ConstApp("string_game_gui_boost_on_icon");
+			else
+				return "";
+		}
+
+		/** Return the appropriate symbol name from the constants
+		 * for the user history type. */
+		public static string GetUserHistoryIcon(UserHistoryType historyType)
+		{
+#if DEBUG
+			Console.WriteLine("TreeViewHelper.GetUserHistoryIcon");
+#endif
+			switch(historyType)
+			{
+			default:
+				Debug.PrintMessage ("treeview_helper_get_user_history_icon: unknown type {0}.\n", historyType);
+				return null;
+			case UserHistoryType.USER_HISTORY_START_GAME:
+				return Option.ConstApp("string_treeview_helper_user_history_symbol_start_game_icon");
+			case UserHistoryType.USER_HISTORY_FIRE_FINANCE:
+				return Option.ConstApp("string_treeview_helper_user_history_symbol_fire_finances_icon");
+			case UserHistoryType.USER_HISTORY_FIRE_FAILURE:
+				return Option.ConstApp("string_treeview_helper_user_history_symbol_fire_failure_icon");
+			case UserHistoryType.USER_HISTORY_JOB_OFFER_ACCEPTED:
+				return Option.ConstApp("string_treeview_helper_user_history_symbol_job_offer_accepted_icon");
+			case UserHistoryType.USER_HISTORY_END_SEASON:
+				return Option.ConstApp("string_treeview_helper_user_history_symbol_end_season_icon");
+			case UserHistoryType.USER_HISTORY_WIN_FINAL:
+				return Option.ConstApp("string_treeview_helper_user_history_symbol_win_final_icon");
+			case UserHistoryType.USER_HISTORY_LOSE_FINAL:
+				return Option.ConstApp("string_treeview_helper_user_history_symbol_lose_final_icon");
+			case UserHistoryType.USER_HISTORY_PROMOTED:
+				return Option.ConstApp("string_treeview_helper_user_history_symbol_promoted_icon");
+			case UserHistoryType.USER_HISTORY_RELEGATED:
+				return Option.ConstApp("string_treeview_helper_user_history_symbol_relegated_icon");
+			case UserHistoryType.USER_HISTORY_REACH_CUP_ROUND:
+				return Option.ConstApp("string_treeview_helper_user_history_symbol_reach_cup_round_icon");
+			case UserHistoryType.USER_HISTORY_CHAMPION:
+				return Option.ConstApp("string_treeview_helper_user_history_symbol_champion_icon");
+			}
+			return null;
+		}
+
+		/** Return a new pixbuf created from the specified filename.
+		 * @param filename Name of a pixmap file located in one of the support directories.
+		 * @return A new pixbuf or NULL on error.
+		 **/
+		public static Pixbuf PixbufFromFilename(string filename)
+		{
+			Pixbuf symbol = null;
+			if (!string.IsNullOrEmpty (filename)) {
+				string symbolFile = FileHelper.FindSupportFile (filename, false);
+				if (!string.IsNullOrEmpty (symbolFile)) {
+					symbol = new Pixbuf (symbolFile);
+				}
+			}
+			return symbol;
+		}
+
+		/** Unref an object if non-null (mostly it's a pixbuf added to a treeview).*/
+		public static void Unref(object obj)
+		{
+#if DEBUG
+			Console.WriteLine("TreeViewHelper.Unref");
+#endif
+		}
+
 		public static void ShowContributors(TreeView treeview)
 		{
 #if DEBUG
@@ -53,33 +299,6 @@ namespace bygfoot
 			treeview.Model = ls;
 		}
 
-		public static CellRenderer TextCellRenderer()
-		{
-			CellRendererText renderer = new CellRendererText();
-
-			string fontName = Option.OptStr("string_opt_font_name");
-			if (!string.IsNullOrEmpty(fontName))
-				renderer.Font = fontName;
-
-			return renderer;
-		}
-
-		/** Return a new pixbuf created from the specified filename.
-		 * @param filename Name of a pixmap file located in one of the support directories.
-		 * @return A new pixbuf or NULL on error.
-		 **/
-		public static Pixbuf PixbufFromFilename(string filename)
-		{
-			Pixbuf symbol = null;
-			if (!string.IsNullOrEmpty (filename)) {
-				string symbolFile = FileHelper.FindSupportFile (filename, false);
-				if (!string.IsNullOrEmpty (symbolFile)) {
-					symbol = new Pixbuf (symbolFile);
-				}
-			}
-			return symbol;
-		}
-
 		public static TreeModel CreateLeagueList(Country country)
 		{
 #if DEBUG
@@ -103,7 +322,7 @@ namespace bygfoot
 			Console.WriteLine("TreeViewHelper.CreateCountryList");
 #endif
 			TreeStore ls = new TreeStore(typeof(Pixbuf), typeof(string));
-			TreeIter iterContinent;
+			TreeIter iterContinent = new TreeIter ();
 			string currentContinent = string.Empty;
 			foreach (string country in countryList) {
 				string[] elements = country.Split(new char[] { Path.DirectorySeparatorChar }, StringSplitOptions.RemoveEmptyEntries);
@@ -119,122 +338,6 @@ namespace bygfoot
 				ls.SetValues(iterCountry, flag, elements[1]);
 			}
 			return ls;
-		}
-
-		/**
-		 * Creates the model for the treeview in the team selection window.
-		 * The model contains a list of all the teams from the leagues in
-		 * the country::leagues array; if show_cup_teams is TRUE, the
-		 * teams from international cups are shown, too.
-		 * @param show_cup_teams Whether or not teams from international
-		 * cups are shown.
-		 * @param show_user_teams Whether or not user teams are shown.
-		 * @return The model containing the team names.
-		 **/
-		public static TreeModel CreateTeamSelectionList(Country country, bool showCupTeams, bool showUserTeams)
-		{
-#if DEBUG
-			Console.WriteLine("TreeViewHelper.CreateTeamSelectionList");
-#endif
-			int count = 1;
-			TreeStore ls = new TreeStore(typeof(int), typeof(Gdk.Pixbuf), typeof(Team), typeof(string), typeof(Team));
-			for (int i = 0; i < country.leagues.Count; i++) {
-				League league = country.leagues [i];
-				for (int j = 0; j < league.teams.Count; j++) {
-					Team team = league.teams [j];
-					if (!team.IsUserTeam())
-					{
-						Pixbuf symbol = PixbufFromFilename (!string.IsNullOrEmpty (team.symbol) ? team.symbol : league.symbol);
-						TreeIter iter = ls.AppendNode();
-						ls.SetValues (iter, count++, symbol, team, league.name, team);
-					}
-				}
-			}
-			if (showCupTeams) {
-			}
-			return ls;
-		}
-
-		/**
-		 * Sets up the treeview for the team selection window.
-		 * Columns and cell renderers are added etc.
-		 * @param treeview The treeview that gets configured.
-		 **/
-		public static void SetupTeamSelectionTreeview(TreeView treeview)
-		{
-#if DEBUG
-			Console.WriteLine("TreeViewHelper.CreateTeamSelectionList");
-#endif
-			//treeview.SelectionMode = GTK_SELECTION_BROWSE;
-			treeview.HeadersVisible = true;
-			treeview.RulesHint = true;
-
-			treeview.SearchColumn = 2;
-			treeview.SearchEqualFunc = SearchEqualTeams;
-
-			/* Numbering the teams */
-			TreeViewColumn column = new TreeViewColumn ();
-			treeview.AppendColumn (column);
-			CellRenderer renderer = TextCellRenderer ();
-			column.PackStart (renderer, true);
-			column.AddAttribute (renderer, "text", 0);
-
-			/* Flags */
-			column = new TreeViewColumn ();
-			treeview.AppendColumn (column);
-			renderer = new CellRendererPixbuf ();
-			column.PackStart (renderer, true);
-			column.AddAttribute (renderer, "pixbuf", 1);
-
-			/* Team column */
-			column = new TreeViewColumn ();
-			column.Title = Catalog.GetString ("Team");
-			treeview.AppendColumn (column);
-			renderer = TextCellRenderer ();
-			column.PackStart (renderer, true);
-			column.SetCellDataFunc (renderer, RenderTeamName);
-
-			/* League column */
-			column = new TreeViewColumn ();
-			column.Title = Catalog.GetString ("League");
-			treeview.AppendColumn (column);
-			renderer = TextCellRenderer ();
-			column.PackStart (renderer, true);
-			column.AddAttribute (renderer, "text", 3);
-
-			/* Average skill */
-			column = new TreeViewColumn ();
-			column.Title = Catalog.GetString ("Av.Sk.");
-			column.SortColumnId = 4;
-			treeview.AppendColumn (column);
-			renderer = TextCellRenderer ();
-			column.PackStart (renderer, true);
-			column.SetCellDataFunc (renderer, RenderAverageSkill);
-		}
-
-		/** Shows the list of teams in the game.
-		 * If show_cup_teams is TRUE, the teams from
-		 * international cups are shown, too.
-		 * @param treeview The treeview we show the list in.
-		 * @param show_cup_teams Whether or not teams from international
-		 * cups are shown.
-		 * @param show_user_teams Whether or not user teams are shown.
-		 **/
-		public static void ShowTeamList(TreeView treeview, bool showCupTeams, bool showUserTeams)
-		{
-#if DEBUG
-			Console.WriteLine("TreeViewHelper.ShowTeamList");
-#endif
-			TreeModel model = CreateTeamSelectionList (Variables.Country, showCupTeams, showUserTeams);
-			TreePath path = new TreePath ("0");
-
-			Clear (treeview);
-
-			SetupTeamSelectionTreeview (treeview);
-			treeview.Model = model;
-
-			TreeSelection selection = treeview.Selection;
-			selection.SelectPath (path);
 		}
 
 		public static bool SearchEqualTeams(TreeModel model, int column, string key, TreeIter iter)
@@ -261,24 +364,6 @@ namespace bygfoot
 #endif
 			Team team = (Team)model.GetValue (iter, 4);
 			(cell as CellRendererText).Text = team.AverageTalent.ToString ();
-		}
-
-		/**
-		 * Removes all columns from a GTK treeview. I didn't find a better way
-		 * to completely clear a treeview :-/.
-		 * @param treeview The pointer to the treeview widget we'd like to clear.
-		 **/
-		public static void Clear(TreeView treeview)
-		{
-#if DEBUG
-			Console.WriteLine("TreeViewHelper.Clear");
-#endif
-			if (treeview != null) {
-				for (int i = treeview.Columns.Length - 1; i >= 0; i--) {
-					treeview.RemoveColumn(treeview.Columns[i]);
-				}
-				treeview.Model = null;
-			}
 		}
 	}
 }

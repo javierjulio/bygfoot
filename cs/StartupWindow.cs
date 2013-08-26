@@ -8,19 +8,28 @@ namespace bygfoot
 	public class StartupWindow
 	{
 		[Glade.Widget]
-		static Window window_startup = null;
+		private static Window window_startup = null;
 
 		[Glade.Widget]
-		static TreeView treeview_startup = null;
+		private static TreeView treeview_startup = null;
 
 		[Glade.Widget]
-		static ComboBox combo_country = null;
+		private static ComboBox combo_country = null;
 
 		[Glade.Widget]
-		static ComboBox combobox_start_league = null;
+		private static ComboBox combobox_start_league = null;
 
 		[Glade.Widget]
-		static Button button_add_player = null;
+		private static Button button_add_player = null;
+
+		[Glade.Widget]
+		private static TreeView treeview_users = null;
+
+		[Glade.Widget]
+		private static Entry entry_player_name = null;
+
+		[Glade.Widget]
+		private static Button team_selection_ok = null;
 
 		public static Window Create()
 		{
@@ -171,6 +180,30 @@ namespace bygfoot
 #if DEBUG
 			Console.WriteLine("on_button_add_player_clicked");
 #endif
+			string playerName = entry_player_name.Text;
+			User newUser = new User ();
+			Team team = (Team)TreeViewHelper.GetPointer (treeview_startup, 2);
+			int startLeague = combobox_start_league.Active;
+
+			if (!string.IsNullOrEmpty (playerName))
+				newUser.Name = playerName;
+			entry_player_name.Text = string.Empty;
+
+			newUser.Team = team;
+			newUser.TeamId = team.id;
+			newUser.Scout = (Quality)(startLeague == 0 || team.clid == Variables.Country.leagues [startLeague - 1].id ? -1 : startLeague - 1);
+			Variables.Users.Add (newUser);
+
+			TreeViewHelper.ShowUsers (treeview_users);
+
+			TreeViewHelper.ShowTeamList (treeview_startup, false, false);
+
+			combobox_start_league.Active = 0;
+
+			if (Variables.Users.Count == 0) {
+				team_selection_ok.Sensitive = true;
+				combo_country.Sensitive = false;
+			}
 		}
 
 		public static void on_team_selection_ok_clicked(object sender, EventArgs e)

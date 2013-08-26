@@ -9,6 +9,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Bygfoot.Net</RootNamespace>
     <AssemblyName>Bygfoot.Net</AssemblyName>
+    <StartupObject>bygfoot.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -19,6 +20,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <NoStdLib>true</NoStdLib>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -27,6 +29,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <NoStdLib>true</NoStdLib>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -67,6 +70,7 @@
     <Compile Include="Objects\Transfer.cs" />
     <Compile Include="Objects\User.cs" />
     <Compile Include="Objects\YouthAcademy.cs" />
+    <Compile Include="TreeView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Objects\" />

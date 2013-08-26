@@ -195,12 +195,14 @@ namespace bygfoot
 #if DEBUG
 			Console.WriteLine("FileHelper.GetBygfootDir");
 #endif
-			string home = GetHomeDir();
-			string pwd = GetCurrentDir();
-			if (Variables.os_is_unix)
-				return string.Format("{0}{1}{2}", home, Path.DirectorySeparatorChar, Bygfoot.HOMEDIRNAME);
-			else
-				return string.Format("{0}{1}", pwd, Path.DirectorySeparatorChar);
+			string homePath = GetHomeDir();
+			string currentPath = string.Format ("{0}{1}", GetCurrentDir (), Path.DirectorySeparatorChar);
+			if (Variables.os_is_unix) {
+				string appPath = string.Format ("{0}{1}{2}", homePath, Path.DirectorySeparatorChar, Bygfoot.HOMEDIRNAME);
+				return File.Exists (appPath) ? appPath : currentPath;
+			} else {
+				return currentPath;
+			}
 		}
 
 		/** Load the appropriate hints file. */
