@@ -121,5 +121,45 @@ namespace bygfoot
 
 		/** The hints displayed in the splash screen. */
 		public static OptionList hints = new OptionList();
+
+		
+		public static string LeagueCupGetName(int id)
+		{
+			return id < Bygfoot.ID_CUP_START ? LeagueFromId (id).name : CupFromId (id).name;
+		}
+
+		/** Return the league pointer belonging to the id.
+		 * @param clid The id we look for.
+		 * @return The league pointer or NULL if failed. */
+		public static League LeagueFromId(int id)
+		{
+#if DEBUG
+			Console.WriteLine("Variables.LeagueFromId");
+#endif
+			foreach (League league in Variables.Country.leagues) {
+				if (league.id == id)
+					return league;
+			}
+
+			Program.ExitProgram(ExitCodes.EXIT_POINTER_NOT_FOUND, "Variables.LeagueFromId: didn't find league with id {0}\n", id);
+			return null;
+		}
+
+		/** Return the cup pointer belonging to the id.
+		 * @param clid The id we look for.
+		 * @return The cup pointer or NULL if failed. */
+		public static Cup CupFromId(int id)
+		{
+#if DEBUG
+			Console.WriteLine("Variables.CupFromId");
+#endif
+			foreach (Cup cup in Variables.Country.cups) {
+				if (cup.id == id)
+					return cup;
+			}
+
+			Program.ExitProgram(ExitCodes.EXIT_POINTER_NOT_FOUND, "Variables.CupFromId: didn't find cup with id {0}\n", id);
+			return null;
+		}
 	}
 }

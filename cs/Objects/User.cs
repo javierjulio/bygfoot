@@ -209,6 +209,7 @@ namespace bygfoot
 
 			Events = new List<Event>();
 			History = new List<UserHistory>();
+			Options = new OptionList ();
 			Options.list = null;
 			Options.datalist = null;
 

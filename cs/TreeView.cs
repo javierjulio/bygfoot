@@ -242,7 +242,24 @@ namespace bygfoot
 #if DEBUG
 			Console.WriteLine("TreeViewHelper.CreateUsers");
 #endif
-			return null;
+			int count = 1;
+			TreeStore ls = new TreeStore(typeof(int), typeof(string), typeof(string), typeof(string));
+			for (int i = 0; i < Variables.Users.Count; i++) {
+				TreeIter iter = ls.AppendNode ();
+				ls.SetValues (iter, count++, i + 1, Variables.Users [i].Name, Variables.Users [i].Team.name);
+
+				if (Variables.status [0] == StatusValue.STATUS_TEAM_SELECTION) {
+					if (Variables.Users [i].Scout == Quality.QUALITY_NONE) {
+						ls.SetValue (iter, 3, Variables.LeagueCupGetName(Variables.Users[i].Team.clid));
+					} else {
+						int index = (int)Variables.Users [i].Scout;
+						ls.SetValue (iter, 3, Variables.Country.leagues[index].name);
+					}
+				} else {
+					ls.SetValue (iter, 3, Variables.LeagueCupGetName(Variables.Users[i].Team.clid));
+				}
+			}
+			return ls;
 		}
 
 		/** Set up the users treeview.
@@ -252,6 +269,24 @@ namespace bygfoot
 #if DEBUG
 			Console.WriteLine("TreeViewHelper.SetupUsers");
 #endif
+			string[] titles = new string[] {
+				"",
+				Catalog.GetString ("Name"),
+				Catalog.GetString ("Team"),
+				Catalog.GetString ("League")
+			};
+			//treeview.SelectionMode = GTK_SELECTION_SINGLE;
+			treeview.RulesHint = false;
+			treeview.HeadersVisible = true;
+
+			for (int i = 0; i < 4; i++) {
+				TreeViewColumn column = new TreeViewColumn ();
+				column.Title = titles [i];
+				treeview.AppendColumn (column);
+				CellRenderer renderer = TextCellRenderer ();
+				column.PackStart (renderer, i != 3);
+				column.AddAttribute (renderer, "text", i);
+			}
 		}
 
 		/** Show the list of users at startup.

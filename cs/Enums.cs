@@ -26,6 +26,7 @@ namespace bygfoot
 	/** Scout and physio qualities. */
 	public enum Quality
 	{
+		QUALITY_NONE = -1,
 		QUALITY_BEST = 0,
 		QUALITY_GOOD,
 		QUALITY_AVERAGE,
