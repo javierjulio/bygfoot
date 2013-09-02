@@ -75,6 +75,11 @@ namespace bygfoot
 		public const string TAG_PLAYER_TALENT = "talent";
 		public const string TAG_PLAYER_POSITION = "position";
 
+		public const string TAG_TEAM_SYMBOL = "team_symbol";
+		public const string TAG_TEAM_NAMES_FILE = "team_names_file";
+		public const string TAG_TEAM_AVERAGE_TALENT = "team_average_talent";
+		public const string TAG_TEAM_DEF_FILE = "def_file";
+
 		public string name;
 		public string symbol;
 		/** File the team takes the 
@@ -91,7 +96,7 @@ namespace bygfoot
 		public int boost; /**< Whether player boost or anti-boost is switched on. */
 		
 		/** Average talent of the players at generation. */
-		public float AverageTalent { get; set; }
+		public double AverageTalent { get; set; }
 		
 		/** A value that influences scoring chances etc.
 		 * If > 1, the team's lucky, if < 1, it's unlucky.
@@ -104,14 +109,53 @@ namespace bygfoot
 		 * */
 		public List<Player> Players { get; set; }
 
-		public Team()
+		public Team(bool bNewId)
 		{
+#if DEBUG
+			Console.WriteLine("Team.Team");
+#endif
+			Stadium = new Stadium ();
+			name = namesFile = symbol = defFile = Stadium.name = strategySid = string.Empty;
+			clid = -1;
+			id = bNewId ? Bygfoot.NewTeamId : -1;
+			structure = 442;
+			Style = 0;
+			boost = 0;
+			AverageTalent = 0;
+			Luck = 1;
+			Players = new List<Player> ();
 		}
 
 		public void Load(XmlNode xnTeam)
 		{
 			XmlNode xnTeamName = xnTeam.SelectSingleNode (TAG_TEAM_NAME);
 			name = xnTeamName.InnerText;
+
+			// Symbol
+			XmlNode xnSymbol = xnTeam.SelectSingleNode (TAG_TEAM_SYMBOL);
+			if (xnSymbol == null)
+				xnSymbol = xnTeam.SelectSingleNode (TAG_SYMBOL);
+			if (xnSymbol != null)
+				symbol = xnSymbol.InnerText;
+
+			// Names File
+			XmlNode xnNamesFile = xnTeam.SelectSingleNode (TAG_TEAM_NAMES_FILE);
+			if (xnNamesFile == null)
+				xnNamesFile = xnTeam.SelectSingleNode (TAG_NAMES_FILE);
+			if (xnNamesFile != null)
+				namesFile = xnNamesFile.InnerText;
+
+			// Average Talent
+			XmlNode xnAverageTalent = xnTeam.SelectSingleNode (TAG_TEAM_AVERAGE_TALENT);
+			if (xnAverageTalent == null)
+				xnAverageTalent = xnTeam.SelectSingleNode (TAG_AVERAGE_TALENT);
+			if (xnAverageTalent != null)
+				AverageTalent = Convert.ToDouble(xnAverageTalent.InnerText);
+
+			// Def File
+			XmlNode xnDefFile = xnTeam.SelectSingleNode (TAG_TEAM_DEF_FILE);
+			if (xnDefFile != null)
+				defFile = xnDefFile.InnerText;
 		}
 
 		public bool IsUserTeam()

@@ -242,11 +242,10 @@ namespace bygfoot
 #if DEBUG
 			Console.WriteLine("TreeViewHelper.CreateUsers");
 #endif
-			int count = 1;
 			TreeStore ls = new TreeStore(typeof(int), typeof(string), typeof(string), typeof(string));
 			for (int i = 0; i < Variables.Users.Count; i++) {
 				TreeIter iter = ls.AppendNode ();
-				ls.SetValues (iter, count++, i + 1, Variables.Users [i].Name, Variables.Users [i].Team.name);
+				ls.SetValues (iter, i + 1, Variables.Users [i].Name, Variables.Users [i].Team.name);
 
 				if (Variables.status [0] == StatusValue.STATUS_TEAM_SELECTION) {
 					if (Variables.Users [i].Scout == Quality.QUALITY_NONE) {

@@ -58,6 +58,12 @@ namespace bygfoot
 		 * @see PromGames
 		 * */
 		public List<PromGames> promGames;
+
+		public PromRel()
+		{
+			elements = new List<PromRelElement> ();
+			promGames = new List<PromGames> ();
+		}
 	}
 
 	/**
@@ -101,65 +107,98 @@ namespace bygfoot
 		public const string TAG_TEAMS = "teams";
 
 		/** Default value "" */
-		public string name = string.Empty;
-		public string shortName = string.Empty;
-		public string sid = string.Empty;
-		public string symbol = string.Empty;
+		public string name { get; set; }
+		public string shortName { get; set; }
+		public string sid { get; set; }
+		public string symbol { get; set; }
 		/** The sid of the player names file the 
 		 * teams in the league take their names from.
 		 * Default: 'general', meaning the 'player_names_general.xml' file. */
-		public string names_file = "general";
+		public string names_file { get; set; }
 		/** @see PromRel */
-		public PromRel promRel;
+		public PromRel promRel { get; set; }
 		/** Numerical id, as opposed to the string id 'sid'. */
 		public int id;
 		/** Layer of the league; this specifies which leagues are
 		 * parallel. */
-		public int layer;
+		public int layer { get; set; }
 		/** The first week games are played. Default 1. */
-		public int firstWeek = 1;
+		public int firstWeek { get; set; }
 		/** Weeks between two matchdays. Default 1. */
-		public int weekGap = 1;
+		public int weekGap { get; set; }
 		/** Here we store intervals of fixtures during which
 		 * there should be two matches in a week instead of one. */
-		public ArrayList[] twoMatchWeeks = new ArrayList[2];
+		public List<int>[] twoMatchWeeks { get; set; }
 		/** How many round robins are played. Important for
 		 * small leagues with 10 teams or so. Default: 2. */
-		public int roundRobins = 2;
+		public int roundRobins { get; set; }
 		/** Number of weeks between the parts of a round robin. */
-		public ArrayList rrBreaks;
+		public List<int> rrBreaks { get; set; }
 		/** Number of yellow cards until a player gets banned. 
 		 * Default 1000 (which means 'off', basically). */
-		public int yellowCard = 1000;
+		public int yellowCard { get; set; }
 		/** Average talent for the first season. Default: -1. */
-		public float averageTalent = -1;
+		public float averageTalent { get; set; }
 		/** Array of teams in the league.
 		 * @see Team */
-		public List<Team> teams = new List<Team>();
+		public List<Team> teams { get; set; }
 		/** List of leagues joined fixture-wise to this one.
 		 * @see JoinedLeague */
-		public List<JoinedLeague> joinedLeagues;
+		public List<JoinedLeague> joinedLeagues { get; set; }
 		/** League tables. Usually only one, sometimes more than one is created.
 		 * @see Table */
-		public ArrayList tables;
+		public List<Table> tables { get; set; }
 		/** Array holding NewTable elements specifying when to add
 		 * a new table to the tables array. */
-		public List<NewTable> newTables;
+		public List<NewTable> newTables { get; set; }
 		/** The fixtures of a season for the league. */
-		public ArrayList fixtures;
+		public List<Fixture> fixtures = new List<Fixture>();
 		/** A gchar pointer array of properties (like "inactive"). */
 		public ArrayList properties;
 		/** Array of custom breaks in schedule. */
-		public List<WeekBreak> weekBreaks;
+		public List<WeekBreak> weekBreaks { get; set; }
 		/** The current league statistics. */
 		public LeagueStat stats;
 		/** Pointer array with the sids of competitions that
         the fixtures of which should be avoided when scheduling
         the league fixtures. */
-		public ArrayList skipWeeksWith;
+		public List<string> skipWeeksWith { get; set; }
 
-		public League ()
+		public League (bool bNewId)
 		{
+#if DEBUG
+			Console.WriteLine("League.League");
+#endif
+			name = string.Empty;
+			names_file = Option.OptStr ("string_opt_player_names_file");
+			sid = string.Empty;
+			shortName = string.Empty;
+			symbol = string.Empty;
+
+			id = bNewId ? Bygfoot.NewLeagueId : -1;
+			layer = -1;
+
+			averageTalent = 0;
+			promRel = new PromRel ();
+
+			teams = new List<Team> ();
+			fixtures = new List<Fixture> ();
+			joinedLeagues = new List<JoinedLeague> ();
+			newTables = new List<NewTable> ();
+			tables = new List<Table> ();
+			//TODO: new.properties = g_ptr_array_new();
+			skipWeeksWith = new List<string> ();
+			rrBreaks = new List<int> ();
+			weekBreaks = new List<WeekBreak> ();
+
+			firstWeek = weekGap = 1;
+			twoMatchWeeks = new List<int>[2];
+			twoMatchWeeks [0] = new List<int> ();
+			twoMatchWeeks [1] = new List<int> ();
+			roundRobins = 2;
+			yellowCard = 1000;
+
+			stats = new LeagueStat (string.Empty, string.Empty);
 		}
 
 		public void Load(string leagueName)
@@ -189,7 +228,13 @@ namespace bygfoot
 
 			XmlNode xnTeams = xnLeague.SelectSingleNode (TAG_TEAMS);
 			foreach (XmlNode xnTeam in xnTeams.ChildNodes) {
-				Team team = new Team ();
+				Team team = new Team (true);
+				if (string.IsNullOrEmpty (team.symbol))
+					team.symbol = symbol;
+				if (string.IsNullOrEmpty (team.namesFile))
+					team.namesFile = names_file;
+				team.clid = id;
+
 				team.Load (xnTeam);
 				teams.Add (team);
 			}

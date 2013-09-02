@@ -3,7 +3,7 @@ using System;
 namespace bygfoot
 {
 	/** Some counters. */
-	public enum CounterType
+	public enum CounterType : int
 	{
 		COUNT_AUTOSAVE = 0,
 		COUNT_AUTOSAVE_FILE,

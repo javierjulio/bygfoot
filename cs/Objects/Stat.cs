@@ -15,15 +15,25 @@ namespace bygfoot
 	/** A structure holding some stat arrays about a league. */
 	public class LeagueStat
 	{
-		public string leagueSymbol;
-		public string leagueName;
+		public string leagueSymbol { get; set; }
+		public string leagueName { get; set; }
 		
 		/** Best offensive and defensive teams. */
-		public List<Team> teamsOff;
-		public List<Team> teamsDef;
+		public List<Stat> teamsOff { get; set; }
+		public List<Stat> teamsDef { get; set; }
 		/** Best goal getters and goalies. */
-		public List<Player> playerScorers;
-		public List<Player> playerGoalies;
+		public List<Stat> playerScorers { get; set; }
+		public List<Stat> playerGoalies { get; set; }
+
+		public LeagueStat(string leagueName, string leagueSymbol)
+		{
+			this.leagueName = leagueName;
+			this.leagueSymbol = leagueSymbol;
+			teamsOff = new List<Stat> ();
+			teamsDef = new List<Stat> ();
+			playerScorers = new List<Stat> ();
+			playerGoalies = new List<Stat> ();
+		}
 	}
 
 	/** A team name and a competition name. */

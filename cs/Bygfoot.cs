@@ -14,6 +14,52 @@ namespace bygfoot
 		{
 			get { return "Bygfoot Football Manager"; }
 		}
+
+		
+		public static int NewPlayerId
+		{
+			get { return Variables.Counters [(int)CounterType.COUNT_PLAYER_ID]++; }
+		}
+
+		public static int NewTeamId
+		{
+			get { return Variables.Counters [(int)CounterType.COUNT_TEAM_ID]++; }
+		}
+
+		public static int NewCupId
+		{
+			get { return Variables.Counters [(int)CounterType.COUNT_CUP_ID]++; }
+		}
+
+		public static int NewLeagueId
+		{
+			get { return Variables.Counters [(int)CounterType.COUNT_LEAGUE_ID]++; }
+		}
+
+		public static int NewFixtureId
+		{
+			get { return Variables.Counters [(int)CounterType.COUNT_FIX_ID]++; }
+		}
+
+		public static int NewLGCommentaryId
+		{
+			get { return Variables.Counters [(int)CounterType.COUNT_LG_COMM_ID]++; }
+		}
+
+		public static int NewNewsTitleId
+		{
+			get { return Variables.Counters [(int)CounterType.COUNT_NEWS_TITLE_ID]++; }
+		}
+
+		public static int NewNewsSubTitleId
+		{
+			get { return Variables.Counters [(int)CounterType.COUNT_NEWS_SUBTITLE_ID]++; }
+		}
+
+		public static int NewNewsArticleId
+		{
+			get { return Variables.Counters [(int)CounterType.COUNT_NEWS_ARTICLE_ID]++; }
+		}
 	}
 
 	public enum ExitCodes

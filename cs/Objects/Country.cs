@@ -51,7 +51,7 @@ namespace bygfoot
 			rating = Convert.ToInt32 (xnRating.InnerText);
 			XmlNode xnLeagues = xnCountry.SelectSingleNode (TAG_LEAGUES);
 			foreach (XmlNode xnLeague in xnLeagues.ChildNodes) {
-				League league = new League ();
+				League league = new League (true);
 				league.Load (xnLeague.InnerText);
 				leagues.Add (league);
 			}
