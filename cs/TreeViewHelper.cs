@@ -307,7 +307,7 @@ namespace bygfoot
 			TreeStore ls = new TreeStore (typeof(string));
 			TreeIter iter = ls.AppendNode ();
 			ls.SetValue (iter, 0, Catalog.GetString ("Current league"));
-			foreach (League league in country.leagues) {
+			foreach (League league in country.Leagues) {
 				iter = ls.AppendNode ();
 				ls.SetValue (iter, 0, league.name);
 			}

@@ -7,7 +7,7 @@ namespace bygfoot
 	public class SplashWindow
 	{
 		[Glade.Widget]
-		static Window window_splash = null;
+		static Gtk.Window window_splash = null;
 
 		[Glade.Widget]
 		static TreeView treeview_splash_contributors = null;
@@ -17,7 +17,7 @@ namespace bygfoot
 		[Glade.Widget]
 		static Label label_splash_hintcounter = null;
 
-		public static Window Create()
+		public static Gtk.Window Create()
 		{
 			Support.LoadUI("bygfoot_misc3.glade", "window_splash", typeof(SplashWindow));
 			return window_splash;
@@ -28,7 +28,7 @@ namespace bygfoot
 #if DEBUG
 			Console.WriteLine("Window.ShowSplash");
 #endif
-			AppWindow.CreateWindow(AppWindowType.WINDOW_SPLASH);
+			Window.Create(AppWindows.WINDOW_SPLASH);
 
 			TreeViewHelper.ShowContributors(treeview_splash_contributors);
 
@@ -115,7 +115,7 @@ namespace bygfoot
 #if DEBUG
 			Console.WriteLine("on_button_splash_new_game_clicked");
 #endif
-			AppWindow.Destroy(ref Variables.Window.splash);
+			Window.Destroy(ref Variables.Window.splash);
 			StartupWindow.ShowStartup();
 
 			Variables.status[0] = StatusValue.STATUS_TEAM_SELECTION;
@@ -143,7 +143,7 @@ namespace bygfoot
 #if DEBUG
 			Console.WriteLine("on_button_splash_quit_clicked");
 #endif
-			AppWindow.Destroy(ref Variables.Window.splash);
+			Window.Destroy(ref Variables.Window.splash);
 			Program.ExitProgram(ExitCodes.EXIT_OK, null);
 		}
 	}

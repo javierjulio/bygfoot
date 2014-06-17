@@ -6,7 +6,16 @@ namespace bygfoot
 {
 	public class Bygfoot
 	{
+		/**
+		 * Program version number and year (copyright).
+		 */
+		public const string VERS = "2.3.3";
+		public const string YEAR = "2005 - 2011";
+
+		/** Home dir name */
 		public const string HOMEDIRNAME = ".bygfoot";
+
+		/** Starting numbers of league, cup and supercup numerical ids. */
 		public const int ID_LEAGUE_START = 1000;
 		public const int ID_CUP_START = 7000;
 
@@ -90,33 +99,33 @@ namespace bygfoot
 
 	public class Windows
 	{
-		public Window main;
-		public Window startup;
-		public Window live;
-		public Window warning;
-		public Window progress;
-		public Window digits;
-		public Window stadium;
-		public Window job_offer;
-		public Window yesno;
-		public Window options;
-		public Window constants;
-		public Window font_sel;
-		public Window file_chooser;
-		public Window contract;
-		public Window menu_player;
-		public Window menu_youth;
-		public Window user_management;
-		public Window wdebug;
-		public Window help;
-		public Window transfer_dialog;
-		public Window sponsors;
-		public Window mmatches;
-		public Window bets;
-		public Window splash;
-		public Window training_camp;
-		public Window news;
-		public Window alr;
+		public Gtk.Window main;
+		public Gtk.Window startup;
+		public Gtk.Window live;
+		public Gtk.Window warning;
+		public Gtk.Window progress;
+		public Gtk.Window digits;
+		public Gtk.Window stadium;
+		public Gtk.Window job_offer;
+		public Gtk.Window yesno;
+		public Gtk.Window options;
+		public Gtk.Window constants;
+		public Gtk.Window font_sel;
+		public Gtk.Window file_chooser;
+		public Gtk.Window contract;
+		public Gtk.Window menu_player;
+		public Gtk.Window menu_youth;
+		public Gtk.Window user_management;
+		public Gtk.Window wdebug;
+		public Gtk.Window help;
+		public Gtk.Window transfer_dialog;
+		public Gtk.Window sponsors;
+		public Gtk.Window mmatches;
+		public Gtk.Window bets;
+		public Gtk.Window splash;
+		public Gtk.Window training_camp;
+		public Gtk.Window news;
+		public Gtk.Window alr;
 	}
 }
 

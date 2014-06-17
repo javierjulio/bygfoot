@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace bygfoot
 {
-	public class Variables
+	public static class Variables
 	{
 		/**
 		 * The main variable of the game.
@@ -42,25 +42,25 @@ namespace bygfoot
 
 		/** The array containing players to be transfered.
 		 * @see TransferPlayer */
-		public static ArrayList TransferList;
+		public static List<Transfer> TransferList;
 		
 		/** Array with season statistics (updated at the
 		 * end of each season. */
-		public static ArrayList SeasonStats;
+		public static List<SeasonStat> SeasonStats;
 		
 		/** Array of available CPU strategies. */
-		public static ArrayList Strategies;
+		public static List<Strategy> Strategies;
 		
 		/** Array of current and recent bets. */
-		public static ArrayList Bets = new ArrayList(2);
+		public static List<BetMatch>[] Bets = new List<BetMatch>[2];
 		
 		/** Loan interest for the current week. */
 		public static double current_interest;
 		
 		/** Array of jobs in the job exchange and
 		 * teams going with the international jobs. */
-		public static ArrayList Jobs;
-		public static ArrayList JobTeams;
+		public static List<Job> Jobs;
+		public static List<Team> JobTeams;
 		
 		/** Some counters we use. */
 		public static int[] Counters = new int[Convert.ToInt32(CounterType.COUNT_END)];
@@ -75,13 +75,13 @@ namespace bygfoot
 		public static int selected_row;
 		
 		/** An array of name lists. */
-		public static ArrayList NameLists;
+		public static List<NameList> NameLists;
 
 		/** The struct containing the window pointers. */
 		public static Windows Window = new Windows();
 		
 		/** The variables for non-user live games (which aren't shown). */
-		public static ArrayList live_games;
+		public static List<LiveGame> LiveGames;
 		
 		/** The index of the current user in the #users array. */
 		public static int cur_user;
@@ -100,21 +100,21 @@ namespace bygfoot
 		 * @see file_find_support_file()
 		 * @see file_add_support_directory_recursive()
 		 **/
-		public static List<string> SupportDirectories; // TODO: GList
+		public static List<string> SupportDirectories;
 		
 		/**
 		 * The list of root defintions directories found (ending in definitions)
 		 **/ 
-		public static List<string> root_definitions_directories = new List<string>(); // TODO: GList
+		public static List<string> root_definitions_directories = new List<string>();
 		
 		/**
 		 * The list of defintions directories found
 		 **/ 
-		public static List<string> definitions_directories = new List<string>(); // TODO: GList
+		public static List<string> definitions_directories = new List<string>();
 		
 		/** The name of the current save file (gets updated when a game is
 		 * saved or loaded).  */
-		public static string save_file;
+		public static string SaveFile;
 		
 		/** Whether we are using a Unix system or Windows. */
 		public static bool os_is_unix;
@@ -136,7 +136,7 @@ namespace bygfoot
 #if DEBUG
 			Console.WriteLine("Variables.LeagueFromId");
 #endif
-			foreach (League league in Variables.Country.leagues) {
+			foreach (League league in Variables.Country.Leagues) {
 				if (league.id == id)
 					return league;
 			}
@@ -153,7 +153,7 @@ namespace bygfoot
 #if DEBUG
 			Console.WriteLine("Variables.CupFromId");
 #endif
-			foreach (Cup cup in Variables.Country.cups) {
+			foreach (Cup cup in Variables.Country.Cups) {
 				if (cup.id == id)
 					return cup;
 			}

@@ -6,12 +6,12 @@ namespace bygfoot
 	public class WarningWindow
 	{
 		[Glade.Widget]
-		static Window window_warning = null;
+		static Gtk.Window window_warning = null;
 
 		[Glade.Widget]
 		private static Label label_warning = null;
 
-		public static Window Create()
+		public static Gtk.Window Create()
 		{
 			string filename = GladeHelper.ProcessGladeFile(FileHelper.FindSupportFile("bygfoot_misc2.glade", true));
 			Glade.XML gxml = new Glade.XML(filename, "window_warning", null);

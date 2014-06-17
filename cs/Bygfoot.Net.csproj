@@ -3,13 +3,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{19E0AF26-8626-4254-829D-46FEE6BB4EA7}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Bygfoot.Net</RootNamespace>
+    <RootNamespace>bygfoot</RootNamespace>
     <AssemblyName>Bygfoot.Net</AssemblyName>
     <StartupObject>bygfoot.Program</StartupObject>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,7 +34,6 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Compile Include="AppWindow.cs" />
     <Compile Include="Bygfoot.cs" />
     <Compile Include="Debug.cs" />
     <Compile Include="Enums.cs" />
@@ -44,13 +44,9 @@
     <Compile Include="LoadSave.cs" />
     <Compile Include="Option.cs" />
     <Compile Include="OptionStruct.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="SplashWindow.cs" />
-    <Compile Include="StartupWindow.cs" />
     <Compile Include="Support.cs" />
     <Compile Include="TreeViewHelper.cs" />
     <Compile Include="Variables.cs" />
-    <Compile Include="WarningWindow.cs" />
     <Compile Include="XmlHelper.cs" />
     <Compile Include="Objects\Bet.cs" />
     <Compile Include="Objects\Country.cs" />
@@ -71,42 +67,35 @@
     <Compile Include="Objects\User.cs" />
     <Compile Include="Objects\YouthAcademy.cs" />
     <Compile Include="TreeView.cs" />
+    <Compile Include="Misc.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="UI\SplashWindow.cs" />
+    <Compile Include="UI\StartupWindow.cs" />
+    <Compile Include="UI\WarningWindow.cs" />
+    <Compile Include="UI\Window.cs" />
+    <Compile Include="UI\MainWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Objects\" />
+    <Folder Include="UI\" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Private>False</Private>
-      <Package>gtk-sharp-2.0</Package>
-    </Reference>
-    <Reference Include="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Private>False</Private>
-      <Package>glade-sharp-2.0</Package>
-    </Reference>
-    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Private>False</Private>
-      <Package>glib-sharp-2.0</Package>
-    </Reference>
-    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Private>False</Private>
-      <Package>gtk-sharp-2.0</Package>
-    </Reference>
-    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Private>False</Private>
-      <Package>gtk-sharp-2.0</Package>
-    </Reference>
+    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="System" />
     <Reference Include="System.Xml" />
-    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Private>False</Private>
-      <Package>gtk-sharp-2.0</Package>
-    </Reference>
+    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="Mono.Posix" />
     <Reference Include="NDesk.Options">
       <HintPath>..\packages\NDesk.Options\NDesk.Options.dll</HintPath>
     </Reference>
     <Reference Include="System.Configuration" />
+    <Reference Include="mscorlib">
+      <HintPath>..\..\..\..\..\..\Library\Frameworks\Mono.framework\Libraries\mono\4.5\mscorlib.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -26,8 +26,8 @@ namespace bygfoot
 #endif
 			int count = 1;
 			TreeStore ls = new TreeStore(typeof(int), typeof(Gdk.Pixbuf), typeof(Team), typeof(string), typeof(Team));
-			for (int i = 0; i < country.leagues.Count; i++) {
-				League league = country.leagues [i];
+			for (int i = 0; i < country.Leagues.Count; i++) {
+				League league = country.Leagues [i];
 				for (int j = 0; j < league.teams.Count; j++) {
 					Team team = league.teams [j];
 					if (!team.IsUserTeam())
@@ -252,7 +252,7 @@ namespace bygfoot
 						ls.SetValue (iter, 3, Variables.LeagueCupGetName(Variables.Users[i].Team.clid));
 					} else {
 						int index = (int)Variables.Users [i].Scout;
-						ls.SetValue (iter, 3, Variables.Country.leagues[index].name);
+						ls.SetValue (iter, 3, Variables.Country.Leagues[index].name);
 					}
 				} else {
 					ls.SetValue (iter, 3, Variables.LeagueCupGetName(Variables.Users[i].Team.clid));

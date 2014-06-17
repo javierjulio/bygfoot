@@ -10,7 +10,7 @@ namespace bygfoot
 		DEBUG_OUT_STDOUT_LOGFILE
 	}
 
-	public class Debug
+	public static class Debug
 	{
 		public static void PrintMessage(string format, params object[] args)
 		{

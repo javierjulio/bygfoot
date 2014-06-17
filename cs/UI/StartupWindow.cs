@@ -8,7 +8,7 @@ namespace bygfoot
 	public class StartupWindow
 	{
 		[Glade.Widget]
-		private static Window window_startup = null;
+		private static Gtk.Window window_startup = null;
 
 		[Glade.Widget]
 		private static TreeView treeview_startup = null;
@@ -31,7 +31,7 @@ namespace bygfoot
 		[Glade.Widget]
 		private static Button team_selection_ok = null;
 
-		public static Window Create()
+		public static Gtk.Window Create()
 		{
 			Support.LoadUI("bygfoot_misc.glade", "window_startup", typeof(StartupWindow));
 
@@ -57,7 +57,7 @@ namespace bygfoot
 #if DEBUG
 			Console.WriteLine("StartupWindow.ShowStartup");
 #endif
-			AppWindow.CreateWindow(AppWindowType.WINDOW_STARTUP);
+			Window.Create(AppWindows.WINDOW_STARTUP);
 			string lastCountry = FileHelper.LoadTextFromSaves("last_country");
 			string[] countryFiles = FileHelper.GetCountryFiles();
 			if (countryFiles.Length == 0)
@@ -77,8 +77,8 @@ namespace bygfoot
 			combo_country.Model = model;
 			combo_country.SetCellDataFunc (renderer, IsCapitalSensitive);
 
-			if (!string.IsNullOrEmpty (Variables.Country.sid))
-				ShowTeamList (Variables.Country.sid);
+			if (!string.IsNullOrEmpty (Variables.Country.SId))
+				ShowTeamList (Variables.Country.SId);
 			else if (!string.IsNullOrEmpty (lastCountry))
 				ShowTeamList (lastCountry);
 			else {
@@ -132,7 +132,7 @@ namespace bygfoot
 				Option.SettingInt("int_opt_disable_ya", 0);
 				Option.SettingInt("int_opt_disable_training_camp", 0); //***ML***
 			}
-			country.leagues.Clear ();
+			country.Leagues.Clear ();
 			country.Load (countryName);
 		}
 
@@ -191,7 +191,7 @@ namespace bygfoot
 
 			newUser.Team = team;
 			newUser.TeamId = team.id;
-			newUser.Scout = (Quality)(startLeague == 0 || team.clid == Variables.Country.leagues [startLeague - 1].id ? -1 : startLeague - 1);
+			newUser.Scout = (Quality)(startLeague == 0 || team.clid == Variables.Country.Leagues [startLeague - 1].id ? -1 : startLeague - 1);
 			Variables.Users.Add (newUser);
 
 			TreeViewHelper.ShowUsers (treeview_users);
@@ -218,7 +218,7 @@ namespace bygfoot
 #if DEBUG
 			Console.WriteLine("on_button_team_selection_back_clicked");
 #endif
-			AppWindow.Destroy (ref Variables.Window.startup);
+			Window.Destroy (ref Variables.Window.startup);
 			Variables.status [0] = StatusValue.STATUS_SPLASH;
 			SplashWindow.ShowSplash ();
 		}

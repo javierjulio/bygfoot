@@ -3,7 +3,7 @@ using Gtk;
 
 namespace bygfoot
 {
-	public class Support
+	public static class Support
 	{
 		public static void LoadUI(string filename, string root, Type handler)
 		{

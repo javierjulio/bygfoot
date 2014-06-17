@@ -20,7 +20,18 @@ namespace bygfoot
 			Console.WriteLine("Language.GetCodeIndex");
 #endif
 			int returnValue = -1;
-			// TODO
+			string[] codes = Misc.SeparateStrings(Option.ConstStr ("string_language_codes"));
+
+			string localCode = code;
+			if (string.Compare (code, "en", true) == 0)
+				localCode = "C";
+
+			for (int i = 0; i < codes.Length; i++) {
+				if (string.Compare (localCode, codes [i], true) == 0) {
+					returnValue = i;
+					break;
+				}
+			}
 			return returnValue;
 		}
 

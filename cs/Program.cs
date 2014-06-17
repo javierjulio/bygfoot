@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using Gtk;
@@ -73,7 +74,7 @@ namespace bygfoot
 
 			if (!string.IsNullOrEmpty(countrySid))
 			{
-				Variables.Country.sid = countrySid;
+				Variables.Country.SId = countrySid;
 			}
 		}
 
@@ -93,13 +94,12 @@ namespace bygfoot
 #if DEBUG
 			Console.WriteLine("Program.InitVariables");
 #endif
-			// TODO: proper initialization of leagues and cups
-			//Variables.Country.leagues = new Array();
-			//Variables.Country.cups = new Array();
-			//Variables.Country.allcups = new Array();
-			Variables.Country.name = null;
-			Variables.Country.symbol = null;
-			Variables.Country.sid = null;
+			Variables.Country.Leagues = new List<League> ();
+			Variables.Country.Cups = new List<Cup> ();
+			Variables.Country.AllCups = new List<Cup> ();
+			Variables.Country.Name = null;
+			Variables.Country.Symbol = null;
+			Variables.Country.SId = null;
 
 			Variables.Season = Variables.Week = Variables.WeekRound = 1;
 
@@ -119,20 +119,17 @@ namespace bygfoot
 					Variables.Window.mmatches = Variables.Window.bets = Variables.Window.splash =
 					Variables.Window.training_camp = null;
 
-			// TODO: initialise
-			/*
-			users = g_array_new(FALSE, FALSE, sizeof(User));
-			transfer_list = g_array_new(FALSE, FALSE, sizeof(Transfer));
-			season_stats = g_array_new(FALSE, FALSE, sizeof(SeasonStat));
-			name_lists = g_array_new(FALSE, FALSE, sizeof(NameList));
-			strategies = g_array_new(FALSE, FALSE, sizeof(Strategy));
-			live_games = g_array_new(FALSE, FALSE, sizeof(LiveGame));
-			bets[0] = g_array_new(FALSE, FALSE, sizeof(BetMatch));
-			bets[1] = g_array_new(FALSE, FALSE, sizeof(BetMatch));
-			jobs = g_array_new(FALSE, FALSE, sizeof(Job));
-			job_teams = g_array_new(FALSE, FALSE, sizeof(Team));
-			*/
-			Variables.save_file = null;
+			Variables.Users = new List<User> ();
+			Variables.TransferList = new List<Transfer> ();
+			Variables.SeasonStats = new List<SeasonStat> ();
+			Variables.NameLists = new List<NameList> ();
+			Variables.Strategies = new List<Strategy> ();
+			Variables.LiveGames = new List<LiveGame> ();
+			Variables.Bets [0] = new List<BetMatch> ();
+			Variables.Bets [1] = new List<BetMatch> ();
+			Variables.Jobs = new List<Job> ();
+			Variables.JobTeams = new List<Team> ();
+			Variables.SaveFile = null;
 
 			Variables.ConstantsApp.list = Variables.Settings.list =
 				Variables.Constants.list = Variables.Options.list = Variables.hints.list = null;
@@ -153,6 +150,28 @@ namespace bygfoot
   			newspaper.articles = g_array_new(FALSE, FALSE, sizeof(NewsPaperArticle));
         	*/
 			FileHelper.LoadConfFiles();
+			/*
+		    xml_strategy_load_strategies();
+
+		    current_interest = rint(math_rnd(const_float("float_finance_interest_lower"),
+		                const_float("float_finance_interest_upper")) /
+		            const_float("float_finance_interest_step")) * const_float("float_finance_interest_step");
+
+		    language_set(language_get_code_index(opt_str("string_opt_language_code")) + 1);
+
+		    option_add(&options, "int_opt_calodds", 0, NULL);
+
+		    /** Some of these (or all) are disabled (set to 1) in supernational
+		      country defs.
+			option_add(&settings, "int_opt_goto_mode", 0, NULL);
+			option_add(&settings, "int_opt_disable_finances", 0, NULL);
+			option_add(&settings, "int_opt_disable_transfers", 0, NULL);
+			option_add(&settings, "int_opt_disable_stadium", 0, NULL);
+			option_add(&settings, "int_opt_disable_contracts", 0, NULL);
+			option_add(&settings, "int_opt_disable_boost_on", 0, NULL);
+			option_add(&settings, "int_opt_disable_ya", 0, NULL);
+			option_add(&settings, "int_opt_disable_training_camp", 0, NULL);
+			 * */
 		}
 
 		/**
@@ -208,7 +227,7 @@ namespace bygfoot
 			    (!_loadLastSave && (args.Length <= 1 ||
 			                    (args.Length > 1 && !LoadSave.LoadGameFromCommandLine(args[1])))))
 			{
-				if (string.IsNullOrEmpty(Variables.Country.sid))
+				if (string.IsNullOrEmpty(Variables.Country.SId))
 				{
 					Variables.status[0] = StatusValue.STATUS_SPLASH;
 					SplashWindow.ShowSplash();
