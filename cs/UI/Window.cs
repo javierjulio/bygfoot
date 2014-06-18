@@ -70,6 +70,16 @@ namespace bygfoot
 				window = Variables.Window.startup;
 				break;
 			case AppWindows.WINDOW_LIVE:
+				if (Variables.Window.live != null)
+					Debug.PrintMessage ("Window.Create: called on already existing window\n");
+				else
+					Variables.Window.live = LiveWindow.Instance.Create ();
+				/*
+				if(((LiveGame*)statp)->fix != NULL)
+					strcpy(buf, league_cup_get_name_string(((LiveGame*)statp)->fix->clid));
+				window = Variables.Window.live;
+				window_live_set_up();
+				*/
 				break;
 			case AppWindows.WINDOW_WARNING:
 				if (Variables.Window.warning != null)

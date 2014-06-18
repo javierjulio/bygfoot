@@ -74,6 +74,7 @@
     <Compile Include="UI\WarningWindow.cs" />
     <Compile Include="UI\Window.cs" />
     <Compile Include="UI\MainWindow.cs" />
+    <Compile Include="UI\LiveWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Objects\" />

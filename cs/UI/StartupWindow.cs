@@ -31,6 +31,15 @@ namespace bygfoot
 		[Glade.Widget]
 		private static Button team_selection_ok = null;
 
+		[Glade.Widget]
+		private static RadioButton radiobutton_team_def_load = null;
+
+		[Glade.Widget]
+		private static RadioButton radiobutton_team_def_names = null;
+
+		[Glade.Widget]
+		private static CheckButton checkbutton_randomise_teams = null;
+
 		public static Gtk.Window Create()
 		{
 			Support.LoadUI("bygfoot_misc.glade", "window_startup", typeof(StartupWindow));
