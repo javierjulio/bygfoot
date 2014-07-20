@@ -75,6 +75,17 @@
     <Compile Include="UI\Window.cs" />
     <Compile Include="UI\MainWindow.cs" />
     <Compile Include="UI\LiveWindow.cs" />
+    <Compile Include="UI\ProgressWindow.cs" />
+    <Compile Include="UI\DigitsWindow.cs" />
+    <Compile Include="UI\StadiumWindow.cs" />
+    <Compile Include="UI\YesNoWindow.cs" />
+    <Compile Include="UI\JobOfferWindow.cs" />
+    <Compile Include="UI\OptionsWindow.cs" />
+    <Compile Include="UI\ConstantsWindow.cs" />
+    <Compile Include="UI\NewsWindow.cs" />
+    <Compile Include="UI\FontSelWindow.cs" />
+    <Compile Include="UI\FileChooserWindow.cs" />
+    <Compile Include="UI\SponsorsWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Objects\" />
