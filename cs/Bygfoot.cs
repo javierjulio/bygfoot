@@ -126,6 +126,8 @@ namespace bygfoot
 		public Gtk.Window training_camp;
 		public Gtk.Window news;
 		public Gtk.Window alr;
+
+		public int PannedPos { get; set; }
 	}
 }
 

@@ -328,6 +328,42 @@ namespace bygfoot
 			//                   math_rndi(const_int("int_initial_money_lower"),
 			//          const_int("int_initial_money_upper")), 2);
 		}
+
+		/** Remove a user from the game.
+		 * @param idx The index of the user in the #users array.
+		 * @param regenerate_team Whether the user's team has to be
+		 * regenerated. */
+		public static void Remove(int index, bool regenerateTeam)
+		{
+			#if DEBUG
+			Console.WriteLine("User.Remove");
+			#endif
+/*
+			gint i;
+
+			if(regenerate_team)
+			{
+				for(i=0;i<usr(idx).tm->players->len;i++)
+					free_player(&g_array_index(usr(idx).tm->players, Player, i));
+
+				g_array_free(usr(idx).tm->players, TRUE);
+				usr(idx).tm->players = g_array_new(FALSE, FALSE, sizeof(Player));
+
+				usr(idx).tm->luck = 1;
+
+				team_generate_players_stadium(usr(idx).tm, 0);
+				for(i=0;i<usr(idx).tm->players->len;i++)
+					g_array_index(usr(idx).tm->players, Player, i).team = usr(idx).tm;
+			}
+
+			free_user(&usr(idx));
+			g_array_remove_index(users, idx);
+
+			cur_user = 0;
+
+			if(window.main != NULL)
+				game_gui_show_main();*/
+		}
 	}
 
 	public enum EventType

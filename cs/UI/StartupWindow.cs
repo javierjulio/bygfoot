@@ -182,6 +182,7 @@ namespace bygfoot
 #if DEBUG
 			Console.WriteLine("on_entry_player_name_activate");
 #endif
+			on_button_add_player_clicked (null, null);
 		}
 
 		public static void on_button_add_player_clicked(object sender, EventArgs e)
@@ -189,30 +190,7 @@ namespace bygfoot
 #if DEBUG
 			Console.WriteLine("on_button_add_player_clicked");
 #endif
-			string playerName = entry_player_name.Text;
-			User newUser = new User ();
-			Team team = (Team)TreeViewHelper.GetPointer (treeview_startup, 2);
-			int startLeague = combobox_start_league.Active;
-
-			if (!string.IsNullOrEmpty (playerName))
-				newUser.Name = playerName;
-			entry_player_name.Text = string.Empty;
-
-			newUser.Team = team;
-			newUser.TeamId = team.id;
-			newUser.Scout = (Quality)(startLeague == 0 || team.clid == Variables.Country.Leagues [startLeague - 1].id ? -1 : startLeague - 1);
-			Variables.Users.Add (newUser);
-
-			TreeViewHelper.ShowUsers (treeview_users);
-
-			TreeViewHelper.ShowTeamList (treeview_startup, false, false);
-
-			combobox_start_league.Active = 0;
-
-			if (Variables.Users.Count == 0) {
-				team_selection_ok.Sensitive = true;
-				combo_country.Sensitive = false;
-			}
+			AddPlayer ();
 		}
 
 		public static void on_team_selection_ok_clicked(object sender, EventArgs e)
@@ -238,6 +216,105 @@ namespace bygfoot
 			Console.WriteLine("on_team_selection_cancel_clicked");
 #endif
 			Program.ExitProgram (ExitCodes.EXIT_OK, null);
+		}
+
+		/** Start a new game after users and teams are selected. */
+		private void StartGame()
+		{
+			#if DEBUG
+			Console.WriteLine("StartupWindow.StartGame");
+			#endif
+
+			Variables.status [0] = StatusValue.STATUS_MAIN;
+			// Option.Add (Variables.Options, "int_opt_load_defs", 1, null);
+			// Option.Add (Variables.Options, "int_opt_randomise_teams", 0, null);
+
+			if (checkbutton_randomise_teams.Active)
+				Option.SettingInt ("int_opt_randomise_teams", 1);
+
+			if (radiobutton_team_def_load.Active)
+				Option.SettingInt ("int_opt_load_defs", 1);
+			else if (radiobutton_team_def_names.Active)
+				Option.SettingInt ("int_opt_load_defs", 2);
+			else
+				Option.SettingInt ("int_opt_load_defs", 0);
+
+			// start_new_game();
+			Window.Destroy (ref Variables.Window.startup);
+			//file_store_text_in_saves("last_country", country.sid);
+
+			if (Option.OptInt ("int_opt_calodds") == 0) // if (!Option.OptInt ("int_opt_calodds"))
+			{
+				foreach (User user in Variables.Users)
+					user.SetupTeamNewGame ();
+
+				Window.Create (AppWindows.WINDOW_MAIN);
+
+				GameGUI.ShowMain();
+				/*if (statp != NULL)
+				{
+					debug_action((gchar*)statp);
+					g_free(statp);
+					statp = NULL;
+				} */
+			}
+			else {
+				//debug_calibrate_betting_odds(opt_int("int_opt_calodds_skilldiffmax"), opt_int("int_opt_calodds_matches"));
+				Program.ExitProgram (ExitCodes.EXIT_OK, null);
+			}
+		}
+
+		/** Add a user to the users array. */
+		private static void AddPlayer()
+		{
+			#if DEBUG
+			Console.WriteLine("StartupWindow.AddPlayer");
+			#endif
+			string playerName = entry_player_name.Text;
+			User newUser = new User ();
+			Team team = (Team)TreeViewHelper.GetPointer (treeview_startup, 2);
+			int startLeague = combobox_start_league.Active;
+
+			if (!string.IsNullOrEmpty (playerName))
+				newUser.Name = playerName;
+			entry_player_name.Text = string.Empty;
+
+			newUser.Team = team;
+			newUser.TeamId = team.id;
+			newUser.Scout = (Quality)(startLeague == 0 || team.clid == Variables.Country.Leagues [startLeague - 1].id ? -1 : startLeague - 1);
+			Variables.Users.Add (newUser);
+
+			TreeViewHelper.ShowUsers (treeview_users);
+			TreeViewHelper.ShowTeamList (treeview_startup, false, false);
+
+			combobox_start_league.Active = 0;
+
+			if (Variables.Users.Count == 1) {
+				team_selection_ok.Sensitive = true;
+				combo_country.Sensitive = false;
+			}
+		}
+
+		/** Remove a user from the users list. 
+		 * @param event The mouse click event on the treeview. */
+		private void RemovePlayer(Gdk.EventButton btnEvent)
+		{
+			#if DEBUG
+			Console.WriteLine("StartupWindow.RemovePlayer");
+			#endif
+
+			if(!TreeViewHelper.SelectRow(treeview_users, btnEvent))
+				return;
+
+			User.Remove(TreeViewHelper.GetIndex(treeview_users, 0) - 1, false);
+
+			TreeViewHelper.ShowUsers (treeview_users);
+			TreeViewHelper.ShowTeamList (treeview_startup, false, false);
+
+			if (Variables.Users.Count == 0) {
+				team_selection_ok.Sensitive = false;
+				combo_country.Sensitive = true;
+			}
 		}
 	}
 }

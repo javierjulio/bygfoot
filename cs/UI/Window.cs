@@ -49,11 +49,6 @@ namespace bygfoot
 					Variables.Window.main = MainWindow.Create ();
 					window = Variables.Window.main;
 					MainWindow.LoadGeometry ();
-					/*
-					window.paned_pos = 
-					    gtk_paned_get_position(
-						GTK_PANED(lookup_widget(window.main, "hpaned2")));
-					 * */
 					GameGUI.PrintMessage (Catalog.GetString ("Welcome to Bygfoot %s"), Bygfoot.VERS);
 					title = string.Format ("Bygfoot Football Manager {0}", Bygfoot.VERS);
 				}

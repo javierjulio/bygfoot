@@ -43,7 +43,7 @@ namespace bygfoot
 			OptionInt (name, Variables.Settings, value);
 		}
 
-		private static string OptionString(string name, OptionList optionList)
+		public static string OptionString(string name, OptionList optionList)
 		{
 #if DEBUG
 			Console.WriteLine("OptionString");
@@ -55,7 +55,7 @@ namespace bygfoot
 			return null;
 		}
 
-		private static int OptionInt(string name, OptionList optionList)
+		public static int OptionInt(string name, OptionList optionList)
 		{
 #if DEBUG
 			Console.WriteLine("OptionInt");
@@ -75,7 +75,7 @@ namespace bygfoot
 			Add (optionList, name, value, string.Empty);
 		}
 
-		private static float OptionFloat(string name, OptionList optionList)
+		public static float OptionFloat(string name, OptionList optionList)
 		{
 #if DEBUG
 			Console.WriteLine("OptionFloat");
