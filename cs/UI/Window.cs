@@ -149,7 +149,7 @@ namespace bygfoot
 					if(Variables.Window.contract != null)
 						Debug.PrintMessage("CreateWindow: called on already existing window");
 					else
-						Variables.Window.contract = create_window_contract();
+						Variables.Window.contract = ContractWindow.Create();
 					window = Variables.Window.contract;
 					title = Catalog.GetString("Contract offer");
 					break;
@@ -157,7 +157,7 @@ namespace bygfoot
 					if(Variables.Window.user_management != null)
 						Debug.PrintMessage("CreateWindow: called on already existing window");
 					else
-						Variables.Window.user_management = create_window_user_management();
+						Variables.Window.user_management = UserManagementWindow.Create();
 					window = Variables.Window.user_management;
 					title = Catalog.GetString("User management");
 					break;
@@ -165,7 +165,7 @@ namespace bygfoot
 					if(Variables.Window.wdebug != null)
 						Debug.PrintMessage("CreateWindow: called on already existing window");
 					else
-						Variables.Window.wdebug = create_window_debug();
+						Variables.Window.wdebug = DebugWindow.Create();
 					window = Variables.Window.wdebug;
 					title = "Bygfoot debug window";
 					break;

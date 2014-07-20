@@ -86,6 +86,9 @@
     <Compile Include="UI\FontSelWindow.cs" />
     <Compile Include="UI\FileChooserWindow.cs" />
     <Compile Include="UI\SponsorsWindow.cs" />
+    <Compile Include="UI\ContractWindow.cs" />
+    <Compile Include="UI\UserManagementWindow.cs" />
+    <Compile Include="UI\DebugWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Objects\" />
