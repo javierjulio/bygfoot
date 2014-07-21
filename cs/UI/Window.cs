@@ -173,14 +173,14 @@ namespace bygfoot
 					if(Variables.Window.help != null)
 						Debug.PrintMessage("CreateWindow: called on already existing window");
 					else
-						Variables.Window.help = create_window_help();
+						Variables.Window.help = HelpWindow.Create();
 					window = Variables.Window.help;
 					break;
 				case AppWindows.WINDOW_TRANSFER_DIALOG:
 					if(Variables.Window.transfer_dialog != null)
 						Debug.PrintMessage("CreateWindow: called on already existing window");
 					else
-						Variables.Window.transfer_dialog = create_window_transfer_dialog();
+						Variables.Window.transfer_dialog = TransferDialogWindow.Create();
 					window = Variables.Window.transfer_dialog;
 					title = Catalog.GetString("Transfer offer");
 					break;
@@ -196,7 +196,7 @@ namespace bygfoot
 					if(Variables.Window.mmatches != null)
 						Debug.PrintMessage("CreateWindow: called on already existing window");
 					else
-						Variables.Window.mmatches = create_window_mmatches();
+						Variables.Window.mmatches = MMatchesWindow.Create();
 					window = Variables.Window.mmatches;
 					title = Catalog.GetString("Memorable matches");
 					break;
@@ -204,7 +204,7 @@ namespace bygfoot
 					if(Variables.Window.bets != null)
 						Debug.PrintMessage("CreateWindow: called on already existing window");
 					else
-						Variables.Window.bets = create_window_bets();
+						Variables.Window.bets = BetsWindow.Create();
 					window = Variables.Window.bets;
 					title = Catalog.GetString("Betting");
 					break;
@@ -219,7 +219,7 @@ namespace bygfoot
 					if(Variables.Window.training_camp != null)
 						Debug.PrintMessage("CreateWindow: called on already existing window");
 					else
-						Variables.Window.training_camp = create_window_training_camp();
+						Variables.Window.training_camp = TrainingCampWindow.Create();
 					window = Variables.Window.training_camp;
 					title = Catalog.GetString("Training camp");
 					break;
@@ -227,7 +227,7 @@ namespace bygfoot
 					if(Variables.Window.alr != null)
 						Debug.PrintMessage("CreateWindow: called on already existing window");
 					else
-						Variables.Window.alr = create_window_alr();
+						Variables.Window.alr = AlrWindow.Create();
 					window = Variables.Window.alr;
 					title = Catalog.GetString("Automatic loan repayment");
 					break;
@@ -235,7 +235,7 @@ namespace bygfoot
 					if(Variables.Window.news != null)
 						Debug.PrintMessage("CreateWindow: called on already existing window");
 					else
-						Variables.Window.news = create_window_news();
+						Variables.Window.news = NewsWindow.Create();
 					window = Variables.Window.news;
 					title = Catalog.GetString("Bygfoot News");
 					break;

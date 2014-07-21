@@ -89,6 +89,12 @@
     <Compile Include="UI\ContractWindow.cs" />
     <Compile Include="UI\UserManagementWindow.cs" />
     <Compile Include="UI\DebugWindow.cs" />
+    <Compile Include="UI\HelpWindow.cs" />
+    <Compile Include="UI\TransferDialogWindow.cs" />
+    <Compile Include="UI\MMatchesWindow.cs" />
+    <Compile Include="UI\BetsWindow.cs" />
+    <Compile Include="UI\TrainingCampWindow.cs" />
+    <Compile Include="UI\AlrWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Objects\" />
