@@ -3,9 +3,9 @@ using Xwt;
 
 namespace Bygfoot.Xwt
 {
-	public partial class SplashWindow : Window
+	public partial class ProgressWindow : Dialog
 	{
-		public SplashWindow()
+		public ProgressWindow()
 		{
 			InitializeComponent();
 		}
