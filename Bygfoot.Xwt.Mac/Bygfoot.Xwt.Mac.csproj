@@ -52,17 +52,19 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="MonoMac" />
-    <Reference Include="Xwt.Mac">
-      <HintPath>..\packages\Xwt\Xwt.Mac.dll</HintPath>
-    </Reference>
-    <Reference Include="Xwt">
-      <HintPath>..\packages\Xwt\Xwt.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bygfoot.Xwt\Bygfoot.Xwt.csproj">
       <Project>{170D4332-4056-422E-8E52-805C93AD268B}</Project>
       <Name>Bygfoot.Xwt</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\externals\xwt\Xwt\Xwt.csproj">
+      <Project>{92494904-35FA-4DC9-BDE9-3A3E87AC49D3}</Project>
+      <Name>Xwt</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\externals\xwt\Xwt.Mac\Xwt.Mac.csproj">
+      <Project>{B7C1673E-5124-4BE5-8D21-EC8B12F85B6B}</Project>
+      <Name>Xwt.Mac</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
