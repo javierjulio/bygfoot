@@ -27,7 +27,8 @@ namespace Bygfoot.Xwt
 			notebook1.CanGetFocus = true;
 
 			image1 = new ImageView();
-			image1.Image = Image.FromFile(@"pixmaps/bygfoot_splash.png");
+			string file = FileHelper.FindSupportFile("bygfoot_splash.png", false);
+			image1.Image = Image.FromFile(file);
 
 			treeview_splash_contributors = new TreeView();
 

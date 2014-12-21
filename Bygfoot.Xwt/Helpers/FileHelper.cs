@@ -17,7 +17,8 @@ namespace Bygfoot.Xwt
 
 		static FileHelper()
 		{
-			AddSupportDirectoryRecursive(Path.Combine(PACKAGE_DATA_DIR, "support_files"));
+			string supportFilesDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PACKAGE_DATA_DIR, "support_files");
+			AddSupportDirectoryRecursive(supportFilesDir);
 			AddSupportDirectoryRecursive(Path.Combine(GetHomeDir(), HOMEDIRNAME));
 
 			_rootDefinitionsDirectories = new List<string>();
@@ -147,7 +148,7 @@ namespace Bygfoot.Xwt
 
 		/** Load a file containing name - value pairs into
 		 * the specified array. */
-		public static void LoadOptFile(string filename, OptionsList optionsList)
+		public static void LoadOptFile(string filename, OptionsList optionsList, bool sort)
 		{
 #if DEBUG
 			Console.WriteLine("FileHelper.LoadOptFile");
@@ -211,7 +212,7 @@ namespace Bygfoot.Xwt
 			if (string.IsNullOrEmpty(hintsPath))
 				hintsFile = "bygfoot_hints_en";
 
-			LoadOptFile(hintsFile, ref Variables.hints, false);
+			LoadOptFile(hintsFile, Variables.hints, false);
 		}
 
 		/** Load the options at the beginning of a new game from
@@ -222,11 +223,11 @@ namespace Bygfoot.Xwt
 			Console.WriteLine("FileHelper.LoadConfFiles");
 #endif
 			string confFile = FindSupportFile("bygfoot.conf", true);
-			LoadOptFile(confFile, ref Variables.Options, false);
-
+			LoadOptFile(confFile, Variables.Options, false);
+			/*//TODO 
 			LoadOptFile(Option.OptStr("string_opt_constants_file"), ref Variables.Constants, true);
 			LoadOptFile(Option.OptStr("string_opt_appearance_file"), ref Variables.ConstantsApp, true);
-			LoadOptFile("bygfoot_tokens", ref Variables.Tokens, false);
+			LoadOptFile("bygfoot_tokens", Variables.Tokens, false);
 			LoadHintsFile();
 
 			for (int i = 0; i < Variables.Tokens.list.Count; i++)
@@ -234,6 +235,7 @@ namespace Bygfoot.Xwt
 				OptionStruct option = ((OptionStruct)(Variables.Tokens.list[i]));
 				option.value = i;
 			}
+			*/
 		}
 
 		public static string LoadTextFromSaves(string filename)
@@ -244,7 +246,7 @@ namespace Bygfoot.Xwt
 			string filepath = null;
 			if (Variables.os_is_unix) {
 				string home = GetHomeDir();
-				filepath = string.Format ("{0}{1}{2}{1}saves{1}{3}", home, Path.DirectorySeparatorChar, Bygfoot.HOMEDIRNAME, filename);
+				//TODO filepath = string.Format ("{0}{1}{2}{1}saves{1}{3}", home, Path.DirectorySeparatorChar, Bygfoot.HOMEDIRNAME, filename);
 			} else {
 				string pwd = GetCurrentDir();
 				filepath = string.Format("{0}{1}saves{1}{2}", pwd, Path.DirectorySeparatorChar, filename);

@@ -54,6 +54,29 @@
     <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="Options\Option.cs" />
     <Compile Include="Options\OptionsList.cs" />
+    <Compile Include="Variables.cs" />
+    <Compile Include="Objects\Bet.cs" />
+    <Compile Include="Objects\Country.cs" />
+    <Compile Include="Objects\Cup.cs" />
+    <Compile Include="Objects\Fixture.cs" />
+    <Compile Include="Objects\Job.cs" />
+    <Compile Include="Objects\League.cs" />
+    <Compile Include="Objects\LGCommentary.cs" />
+    <Compile Include="Objects\LiveGame.cs" />
+    <Compile Include="Objects\NameList.cs" />
+    <Compile Include="Objects\NewsArticle.cs" />
+    <Compile Include="Objects\Player.cs" />
+    <Compile Include="Objects\Stat.cs" />
+    <Compile Include="Objects\Strategy.cs" />
+    <Compile Include="Objects\Table.cs" />
+    <Compile Include="Objects\Team.cs" />
+    <Compile Include="Objects\Transfer.cs" />
+    <Compile Include="Objects\User.cs" />
+    <Compile Include="Objects\YouthAcademy.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="Language.cs" />
+    <Compile Include="XmlHelper.cs" />
+    <Compile Include="Game.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helpers\" />
