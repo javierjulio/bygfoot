@@ -27,3 +27,5 @@ test-results/
 # updated glade files
 *.mono.glade
 *.processed
+
+.vs
