@@ -17,12 +17,14 @@ namespace Bygfoot.Xwt
 
 		static FileHelper()
 		{
-			string supportFilesDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PACKAGE_DATA_DIR, "support_files");
+            _rootDefinitionsDirectories = new List<string>();
+            _definitionsDirectories = new List<string>();
+
+            var baseDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PACKAGE_DATA_DIR);
+            baseDir = Path.GetFullPath(baseDir);
+            string supportFilesDir = Path.Combine(baseDir, "support_files");
 			AddSupportDirectoryRecursive(supportFilesDir);
 			AddSupportDirectoryRecursive(Path.Combine(GetHomeDir(), HOMEDIRNAME));
-
-			_rootDefinitionsDirectories = new List<string>();
-			_definitionsDirectories = new List<string>();
 		}
 
 		/**
