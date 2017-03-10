@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using Xwt;
 using Xwt.Drawing;
 
@@ -6,7 +7,9 @@ namespace Bygfoot.Xwt
 {
 	public partial class SplashWindow : Window
 	{
-		private VBox vbox2 = null;
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
+        private VBox vbox2 = null;
 		private Notebook notebook1 = null;
 		private ImageView image1 = null;
 		private ScrollView scrolledwindow2 = null;
@@ -35,7 +38,17 @@ namespace Bygfoot.Xwt
 			scrolledwindow2 = new ScrollView();
 			scrolledwindow2.Content = treeview_splash_contributors;
 
-			notebook1.Add(image1, "");
+            string helpFile = FileHelper.FindSupportFile("bygfoot_help", true);
+            if (string.IsNullOrEmpty(helpFile))
+            {
+                logger.Warn("Didn't find file 'bygfoot_help'.");
+                //GameGUI.ShowWarning(Mono.Unix.Catalog.GetString("Didn't find file 'bygfoot_help'."));
+                return;
+            }
+            OptionsList helpList = null;
+            FileHelper.LoadOptFile(helpFile, helpList, false);
+
+            notebook1.Add(image1, "");
 			notebook1.Add(scrolledwindow2, "");
 			vbox2.PackStart(notebook1);	
 
