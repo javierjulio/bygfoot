@@ -5,11 +5,13 @@ namespace Bygfoot.Xwt
 {
 	public class OptionsList
 	{
-		private Dictionary<string, Option> _optionsList;
+        private List<Option> _lstOptions;
+		private Dictionary<string, Option> _dictOptions;
 
 		public OptionsList()
 		{
-			_optionsList = new Dictionary<string, Option>();
+            _lstOptions = new List<Option>();
+			_dictOptions = new Dictionary<string, Option>();
 		}
 
 		public void Add(string name, string value)
@@ -19,14 +21,15 @@ namespace Bygfoot.Xwt
 
 		public void Add(Option option)
 		{
-			if (!_optionsList.ContainsKey(option.Name))
-				_optionsList.Add(option.Name, option);
+            _lstOptions.Add(option);
+			if (!_dictOptions.ContainsKey(option.Name))
+				_dictOptions.Add(option.Name, option);
 		}
 
 		public void Remove(string name)
 		{
-			if (_optionsList.ContainsKey(name))
-				_optionsList.Remove(name);
+			if (_dictOptions.ContainsKey(name))
+				_dictOptions.Remove(name);
 		}
 
 		public void Remove(Option option)
@@ -38,21 +41,37 @@ namespace Bygfoot.Xwt
 		{
 			get
 			{
-				if (_optionsList.ContainsKey(name))
-					return _optionsList[name];
+				if (_dictOptions.ContainsKey(name))
+					return _dictOptions[name];
 				return null;
 			}
 		}
+
+        public Option this[int index]
+        {
+            get { return _lstOptions[index]; }
+        }
 
 		public dynamic this[string name, Type type]
 		{
 			get
 			{
-				if (_optionsList.ContainsKey(name))
-					return _optionsList[name].GetValue(type);
+				if (_dictOptions.ContainsKey(name))
+					return _dictOptions[name].GetValue(type);
 				return null;
 			}
 		}
+
+        public int Count
+        {
+            get { return _lstOptions.Count; }
+        }
+
+        public void Sort()
+        {
+            var comparer = new OptionNameComparer();
+            _lstOptions.Sort(comparer);
+        }
 	}
 }
 

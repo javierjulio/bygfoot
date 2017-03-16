@@ -1,3 +1,4 @@
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -7,7 +8,9 @@ namespace Bygfoot.Xwt
 {
 	public class FileHelper
 	{
-		private static string PACKAGE_DATA_DIR = ConfigurationManager.AppSettings["PACKAGE_DATA_DIR"];
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
+
+        private static string PACKAGE_DATA_DIR = ConfigurationManager.AppSettings["PACKAGE_DATA_DIR"];
 		private static string PACKAGE_LOCALE_DIR = GetCurrentDir();
 		private static string HOMEDIRNAME = ".bygfoot";
 
@@ -32,9 +35,8 @@ namespace Bygfoot.Xwt
 		 **/
 		public static void AddDefinitionsDirectory(string directory)
 		{
-#if DEBUG
-			Console.WriteLine("FileHelper.AddDefinitionsDirectory");
-#endif
+            _logger.Debug("FileHelper.AddDefinitionsDirectory");
+
 			string []dirNames = directory.Split(new char[] { Path.DirectorySeparatorChar }, StringSplitOptions.RemoveEmptyEntries);
 			if (dirNames[dirNames.Length -1].ToLower().Equals("definitions"))
 			{
@@ -50,9 +52,7 @@ namespace Bygfoot.Xwt
 
 		public static void AddSupportDirectoryRecursive(string directory)
 		{
-#if DEBUG
-			Console.WriteLine("FileHelper.AddSupportDirectoryRecursive");
-#endif
+            _logger.Debug("FileHelper.AddSupportDirectoryRecursive");
 			
 			if (!Directory.Exists(directory))
 				return;
@@ -74,9 +74,8 @@ namespace Bygfoot.Xwt
 		
 		public static string FindSupportFile (string filename, bool warning)
 		{
-#if DEBUG
-			Console.WriteLine("FileHelper.FindSupportFile");
-#endif
+            _logger.Debug("FileHelper.FindSupportFile");
+
 			filename = Path.GetFileName(filename);
 			foreach (string directory in _supportDirectories)
 			{
@@ -92,16 +91,13 @@ namespace Bygfoot.Xwt
 
 		public static void CheckHomeDir()
 		{
-#if DEBUG
-			Console.WriteLine("FileHelper.CheckHomeDir");
-#endif
+            _logger.Debug("FileHelper.CheckHomeDir");
 		}
 
 		public static void GetOptFromLine(string line, ref string optName, ref string optValue)
 		{
-#if DEBUG
-			Console.WriteLine("FileHelper.GetOptFromLine");
-#endif
+            _logger.Debug("FileHelper.GetOptFromLine");
+
 			if (line.IndexOf('#') >= 0)
 				line = line.Substring(0, line.IndexOf('#'));
 
@@ -129,11 +125,9 @@ namespace Bygfoot.Xwt
 		 * The files are appended with the directories*/
 		public static string[] GetCountryFiles()
 		{
-#if DEBUG
-			Console.WriteLine("FileHelper.GetCountryFiles");
-#endif
-			List<string> countryFiles = new List<string>();
+            _logger.Debug("FileHelper.GetCountryFiles");
 
+			List<string> countryFiles = new List<string>();
 			foreach (string dir in _definitionsDirectories)
 			{
 				string[] dirContents = Directory.GetFiles(dir, "country_*.xml", SearchOption.AllDirectories);
@@ -150,12 +144,11 @@ namespace Bygfoot.Xwt
 
 		/** Load a file containing name - value pairs into
 		 * the specified array. */
-		public static void LoadOptFile(string filename, OptionsList optionsList, bool sort)
+		public static OptionsList LoadOptFile(string filename, bool sort)
 		{
-#if DEBUG
-			Console.WriteLine("FileHelper.LoadOptFile");
-#endif
-			optionsList = new OptionsList();
+            _logger.Debug("FileHelper.LoadOptFile");
+
+			var optionsList = new OptionsList();
 			string path = FindSupportFile(filename, false);
 			string[] lines = File.ReadAllLines(path);
 			foreach (string line in lines)
@@ -163,16 +156,23 @@ namespace Bygfoot.Xwt
 				string optName = null, optValue = null;
 				if (ParseOptLine(line, ref optName, ref optValue))
 				{
-					optionsList.Add(optName, optValue);
-					/*
-					if ((optName.EndsWith("_unix") && Variables.os_is_unix) ||
-					    (optName.EndsWith("_win32") && !Variables.os_is_unix))
-					{
-						option.name = optName.Remove(optName.IndexOf(Variables.os_is_unix ? "_unix" : "_win32"));
-						optionList.list.Add(option);
-					} */
+                    optionsList.Add(optName, optValue);
+
+                    if ((optName.EndsWith("_unix") && Variables.os_is_unix) ||
+                        (optName.EndsWith("_win32") && !Variables.os_is_unix))
+                    {
+                        optName = optName.Remove(optName.IndexOf(Variables.os_is_unix ? "_unix" : "_win32"));
+                        optionsList.Add(optName, optValue);
+                    }
 				}
 			}
+
+            if (sort)
+            {
+                optionsList.Sort();
+            }
+
+            return optionsList;
 		}
 
 		public static string GetHomeDir()
@@ -189,9 +189,8 @@ namespace Bygfoot.Xwt
 		 * and write the location into the string. */
 		public static string GetBygfootDir()
 		{
-#if DEBUG
-			Console.WriteLine("FileHelper.GetBygfootDir");
-#endif
+            _logger.Debug("FileHelper.GetBygfootDir");
+
 			string homePath = GetHomeDir();
 			string currentPath = string.Format ("{0}{1}", GetCurrentDir (), Path.DirectorySeparatorChar);
 			if (Variables.os_is_unix) {
@@ -205,27 +204,25 @@ namespace Bygfoot.Xwt
 		/** Load the appropriate hints file. */
 		public static void LoadHintsFile()
 		{
-#if DEBUG
-			Console.WriteLine("FileHelper.LoadHintsFile");
-#endif
+            _logger.Debug("FileHelper.LoadHintsFile");
+
 			string langCode = Language.GetCode();
 			string hintsFile = string.Format("bygfoot_hints_{0}", langCode);
 			string hintsPath = FindSupportFile(hintsFile, false);
 			if (string.IsNullOrEmpty(hintsPath))
 				hintsFile = "bygfoot_hints_en";
 
-			LoadOptFile(hintsFile, Variables.hints, false);
+            Variables.hints = LoadOptFile(hintsFile, false);
 		}
 
 		/** Load the options at the beginning of a new game from
 		 * the configuration files. */
 		public static void LoadConfFiles()
 		{
-#if DEBUG
-			Console.WriteLine("FileHelper.LoadConfFiles");
-#endif
+            _logger.Debug("FileHelper.LoadConfFiles");
+
 			string confFile = FindSupportFile("bygfoot.conf", true);
-			LoadOptFile(confFile, Variables.Options, false);
+            Variables.Options = LoadOptFile(confFile, false);
 			/*//TODO 
 			LoadOptFile(Option.OptStr("string_opt_constants_file"), ref Variables.Constants, true);
 			LoadOptFile(Option.OptStr("string_opt_appearance_file"), ref Variables.ConstantsApp, true);
@@ -242,9 +239,8 @@ namespace Bygfoot.Xwt
 
 		public static string LoadTextFromSaves(string filename)
 		{
-#if DEBUG
-			Console.WriteLine("FileHelper.LoadTextFromSaves");
-#endif
+            _logger.Debug("FileHelper.LoadTextFromSaves");
+
 			string filepath = null;
 			if (Variables.os_is_unix) {
 				string home = GetHomeDir();

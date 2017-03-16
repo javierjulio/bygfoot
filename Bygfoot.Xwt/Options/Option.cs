@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Bygfoot.Xwt
 {
 	public class Option
-	{
+    {
 		const float OPTION_FLOAT_DIVISOR = (float)100000.0;
 
 		public string Name { get; set; }
@@ -27,6 +29,14 @@ namespace Bygfoot.Xwt
 				returnValue = (float)returnValue / OPTION_FLOAT_DIVISOR;
 			return returnValue;
 		}
-	}
+    }
+
+    public class OptionNameComparer : IComparer<Option>
+    {
+        public int Compare(Option x, Option y)
+        {
+            return x.Name.CompareTo(y.Name);
+        }
+    }
 }
 
