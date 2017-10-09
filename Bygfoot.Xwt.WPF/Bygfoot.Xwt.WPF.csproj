@@ -40,22 +40,21 @@
       <Project>{170D4332-4056-422E-8E52-805C93AD268B}</Project>
       <Name>Bygfoot.Xwt</Name>
     </ProjectReference>
-    <ProjectReference Include="..\externals\xwt\Xwt\Xwt.csproj">
-      <Project>{92494904-35FA-4DC9-BDE9-3A3E87AC49D3}</Project>
-      <Name>Xwt</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\externals\xwt\Xwt.WPF\Xwt.WPF.csproj">
-      <Project>{C93D746E-1586-4D4F-B411-BF5A966E6A08}</Project>
-      <Name>Xwt.WPF</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="Xwt, Version=0.2.40.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xwt.0.2.40\lib\net40\Xwt.dll</HintPath>
+    </Reference>
+    <Reference Include="Xwt.WPF, Version=0.2.40.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xwt.WPF.0.2.40\lib\net40\Xwt.WPF.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
