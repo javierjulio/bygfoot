@@ -1,4 +1,5 @@
-﻿using NLog;
+﻿using Bygfoot.Helpers;
+using NLog;
 using System;
 using Xwt;
 using Xwt.Drawing;

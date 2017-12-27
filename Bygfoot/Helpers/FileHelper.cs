@@ -11,7 +11,7 @@ namespace Bygfoot.Helpers
 	{
 		private static Logger _logger = LogManager.GetCurrentClassLogger();
 
-        private static string PACKAGE_DATA_DIR = "../../../../../.."; //ConfigurationManager.AppSettings["PACKAGE_DATA_DIR"];
+        private static string PACKAGE_DATA_DIR = @"..\..\.."; //ConfigurationManager.AppSettings["PACKAGE_DATA_DIR"];
 		private static string PACKAGE_LOCALE_DIR = GetCurrentDir();
 		private static string HOMEDIRNAME = ".bygfoot";
 
@@ -207,7 +207,7 @@ namespace Bygfoot.Helpers
 		}
 
 		/** Load the appropriate hints file. */
-		public static void LoadHintsFile()
+		public static OptionsList LoadHintsFile()
 		{
 			_logger.Debug("FileHelper.LoadHintsFile");
 
@@ -218,7 +218,8 @@ namespace Bygfoot.Helpers
 				hintsFile = "bygfoot_hints_en";
 
 			Variables.hints = LoadOptFile(hintsFile, false);
-		}
+            return Variables.hints;
+        }
 
 		/** Load the options at the beginning of a new game from
          * the configuration files. */

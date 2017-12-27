@@ -1,4 +1,5 @@
-﻿using NLog;
+﻿using Bygfoot.Helpers;
+using NLog;
 using System;
 using System.IO;
 using Xwt;
@@ -15,7 +16,7 @@ namespace Bygfoot.Xwt
 
             //TreeViewHelper.ShowContributors(treeview_splash_contributors);
 
-            FileHelper.LoadHintsFile();
+            Variables.hints = FileHelper.LoadHintsFile();
 
             LoadHintNumber();
             ShowHint();
