@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bygfoot.Model;
+using System;
 using System.Collections.Generic;
 
 namespace Bygfoot.Xwt
