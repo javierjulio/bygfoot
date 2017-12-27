@@ -64,12 +64,6 @@
     <Compile Include="Game.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Bygfoot\Bygfoot.csproj">
-      <Project>{c918d151-9de7-4f1e-99da-82534ce7b05c}</Project>
-      <Name>Bygfoot</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -78,5 +72,11 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Bygfoot.Core\Bygfoot.Core.csproj">
+      <Project>{016cf32b-de02-4026-ab80-7a7676815580}</Project>
+      <Name>Bygfoot.Core</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
