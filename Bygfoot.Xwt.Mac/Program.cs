@@ -1,10 +1,9 @@
-﻿using System;
-using Bygfoot.Xwt;
-using Xwt;
-
-
-namespace Bygfoot.Xwt.WPF
+﻿namespace Bygfoot.Xwt.WPF
 {
+	using System;
+	using Bygfoot.Xwt;
+    using global::Xwt;
+
 	public class Program
 	{
 		[STAThread]

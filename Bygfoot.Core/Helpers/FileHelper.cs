@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.IO;
 using Bygfoot.Options;
-using NLog;
 using System.Configuration;
+using Serilog.Core;
+using Serilog;
 
 namespace Bygfoot.Helpers
 {
 	public class FileHelper
 	{
-		private static Logger _logger = LogManager.GetCurrentClassLogger();
+		private static Logger _logger = new LoggerConfiguration().CreateLogger();
 
         private static string PACKAGE_DATA_DIR = @"..\..\.."; //ConfigurationManager.AppSettings["PACKAGE_DATA_DIR"];
 		private static string PACKAGE_LOCALE_DIR = GetCurrentDir();

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
+    <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,6 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NLog" Version="4.5.0-rc03" />
+    <PackageReference Include="Serilog" Version="2.10.0" />
   </ItemGroup>
 </Project>
