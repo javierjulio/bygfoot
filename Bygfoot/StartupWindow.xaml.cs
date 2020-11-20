@@ -5,15 +5,15 @@
     using Avalonia.Controls;
     using Avalonia.Markup.Xaml;
 
-    public class SplashWindow : Window
+    public class StartupWindow : Window
     {
-        public SplashWindow()
+        public StartupWindow()
         {
             InitializeComponent();
 #if DEBUG
             this.AttachDevTools();
 #endif
-            DataContext = new SplashWindowViewModel();
+            DataContext = new StartupWindowViewModel();
         }
 
         private void InitializeComponent()
@@ -22,13 +22,13 @@
         }
     }
 
-    public class SplashWindowViewModel : INotifyPropertyChanged
+    public class StartupWindowViewModel : INotifyPropertyChanged
     {
         private readonly IHintProvider hintProvider;
         private string currentHint;
         private int currentHintNumber;
 
-        public SplashWindowViewModel()
+        public StartupWindowViewModel()
         {
             hintProvider = new HintProvider();
             currentHintNumber = hintProvider.GetLastHintNumber();

@@ -13,8 +13,8 @@ namespace Bygfoot.Xwt
             _logger.Debug("App.Run");
 			Application.Initialize(type);
 
-			SplashWindow splash = new SplashWindow();
-			splash.Show();
+			var startupWindow = new StartupWindow();
+			startupWindow.Show();
 
 			Application.Run();
 
