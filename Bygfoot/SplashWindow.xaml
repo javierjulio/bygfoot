@@ -1,0 +1,56 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="550" d:DesignHeight="600"
+        x:Class="Bygfoot.SplashWindow"
+        Title="AvaloniaAppTemplate"
+        Width="550" Height="600" WindowStartupLocation="CenterScreen">
+
+    <StackPanel x:Name="vbox2" Orientation"Vertical">
+        <TabControl x:Name="notebook1">
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock x:Name="label2" VerticalAlignment="Center">     </TextBlock>
+                </TabItem.Header>
+                <Image x:Name="pixbuf" Source="pixmaps/bygfoot_splash.png">
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock x:Name="label3" VerticalAlignment="Center">Contributors</TextBlock>
+                </TabItem.Header>
+                <ScrollViewer x:Name="scrolledwindow2">
+                    <TreeView x:Name="treeview_splash_contributors">
+                    </TreeView>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+
+        <Border x:Name="hseparator11" BorderBrush="Black" BorderThickness="1" Padding="5" />
+        <StackPanel x:Name="vbox2" Orientation="Vertical">
+            <StackPanel x:Name="hbox2" Orientation="Horizontal">
+                <Image x:Name="image2" Source="gtk-dialog-info" />
+                <TextBlock x:Name="label">Did you know?</TextBlock>
+                <TextBlock x:Name="label_splash_hintcounter"></TextBlock>
+            </StackPanel>
+            <TextBlock x:Name="label_splash_hint" x:Height="90"></TextBlock>
+            <StackPanel x:Name="hbox10" Orientation="Horizontal">
+                <Button x:Name="button_splash_hint_back" Width="160" Command="{Binding on_button_splash_hint_back_clicked}">Previous</Button>
+                <Button x:Name="button_splash_hint_next" Width="160" Command="{Binding on_button_splash_hint_next_clicked}">Next</Button>
+            </StackPanel>
+
+            <Border x:Name="hseparator4" BorderBrush="Black" BorderThickness="1" Padding="5" />
+            <StackPanel x:Name="hbox3" Orientation="Horizontal">
+                <Button x:Name="button_splash_new_game" Width="160" Command="{Binding on_button_splash_new_game_clicked}">Start _new game</Button>
+                <Button x:Name="button_splash_load_game" Width="160" Command="{Binding on_button_splash_load_game_clicked}">_Load game</Button>
+                <Button x:Name="button_splash_resume_game" Width="160" Command="{Binding on_button_splash_resume_game_clicked}">_Resume game</Button>
+                <Button x:Name="button_splash_quit" Width="160" Command="{Binding on_button_splash_quit_clicked}">Quit</Button>
+            </StackPanel>
+
+            <StackPanel x:Name="hbox7" Orientation="Horizontal">
+                <TextBlock x:Name="label_splash_progress" x:Width="400">Ready</TextBlock>
+                <ProgressBar x:Name="progressbar_splash" x:Height="10">
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
+</Window>
