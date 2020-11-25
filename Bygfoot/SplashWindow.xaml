@@ -2,18 +2,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="550" d:DesignHeight="600"
+        mc:Ignorable="d" d:DesignWidth="660" d:DesignHeight="500"
         x:Class="Bygfoot.SplashWindow"
         Title="AvaloniaAppTemplate"
-        Width="550" Height="600" WindowStartupLocation="CenterScreen">
-
-  <StackPanel x:Name="vbox2" Orientation="Vertical">
+        Padding="5" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight">
+  <StackPanel x:Name="vbox2" Orientation="Vertical" Spacing="3">
     <TabControl x:Name="notebook1">
       <TabItem>
         <TabItem.Header>
           <TextBlock x:Name="label2" VerticalAlignment="Center">     </TextBlock>
         </TabItem.Header>
-        <Image x:Name="pixbuf" Source="pixmaps/bygfoot_splash.png" />
+        <Image x:Name="pixbuf" Width="345" Height="230" Source="/Assets/bygfoot_splash.png" />
       </TabItem>
       <TabItem>
         <TabItem.Header>
@@ -25,32 +24,29 @@
         </ScrollViewer>
       </TabItem>
     </TabControl>
-
-    <Border x:Name="hseparator11" BorderBrush="Black" BorderThickness="1" Padding="5" />
+    <Separator x:Name="hseparator3" BorderBrush="Black" BorderThickness="1" />
     <StackPanel x:Name="vbox3" Orientation="Vertical">
-      <StackPanel x:Name="hbox2" Orientation="Horizontal">
-        <Image x:Name="image2" Source="gtk-dialog-info" />
-        <TextBlock x:Name="label">Did you know?</TextBlock>
-        <TextBlock x:Name="label_splash_hintcounter"></TextBlock>
+      <StackPanel x:Name="hbox2" Orientation="Horizontal" Spacing="3">
+        <Image x:Name="image2" Width="48" Height="48" Source="/Assets/gtk_dialog_info.png" />
+        <TextBlock x:Name="label" VerticalAlignment="Center">Did you know?</TextBlock>
+        <TextBlock x:Name="label_splash_hintcounter" VerticalAlignment="Center" Margin="5"></TextBlock>
       </StackPanel>
-      <TextBlock x:Name="label_splash_hint" Height="90"></TextBlock>
-      <StackPanel x:Name="hbox10" Orientation="Horizontal">
-        <Button x:Name="button_splash_hint_back" Width="160" Command="{Binding on_button_splash_hint_back_clicked}">Previous</Button>
-        <Button x:Name="button_splash_hint_next" Width="160" Command="{Binding on_button_splash_hint_next_clicked}">Next</Button>
+      <TextBlock x:Name="label_splash_hint" Height="90" Margin="5 5" Text="{Binding HintText}" />
+      <StackPanel x:Name="hbox10" Orientation="Horizontal" Spacing="3">      
+        <Button x:Name="button_splash_hint_back" Width="323" Command="{Binding PrevButtonClicked}">Previous</Button>
+        <Button x:Name="button_splash_hint_next" Width="323" Command="{Binding NextButtonClicked}">Next</Button>
       </StackPanel>
-
-      <Border x:Name="hseparator4" BorderBrush="Black" BorderThickness="1" Padding="5" />
-      <StackPanel x:Name="hbox3" Orientation="Horizontal">
-        <Button x:Name="button_splash_new_game" Width="160" Command="{Binding on_button_splash_new_game_clicked}">Start _new game</Button>
-        <Button x:Name="button_splash_load_game" Width="160" Command="{Binding on_button_splash_load_game_clicked}">_Load game</Button>
-        <Button x:Name="button_splash_resume_game" Width="160" Command="{Binding on_button_splash_resume_game_clicked}">_Resume game</Button>
-        <Button x:Name="button_splash_quit" Width="160" Command="{Binding on_button_splash_quit_clicked}">Quit</Button>
-      </StackPanel>
-
-      <StackPanel x:Name="hbox7" Orientation="Horizontal">
-        <TextBlock x:Name="label_splash_progress" Width="400">Ready</TextBlock>
-        <ProgressBar x:Name="progressbar_splash" Height="10"></ProgressBar>
-      </StackPanel>
+    </StackPanel>
+    <Separator x:Name="hseparator4" BorderBrush="Black" BorderThickness="1" />
+    <StackPanel x:Name="hbox3" Orientation="Horizontal" Spacing="3">
+      <Button x:Name="button_splash_new_game" Width="160" Command="{Binding on_button_splash_new_game_clicked}">Start new game</Button>
+      <Button x:Name="button_splash_load_game" Width="160" Command="{Binding on_button_splash_load_game_clicked}">Load game</Button>
+      <Button x:Name="button_splash_resume_game" Width="160" Command="{Binding on_button_splash_resume_game_clicked}">Resume game</Button>
+      <Button x:Name="button_splash_quit" Width="160" Command="{Binding QuitButtonClicked}">Quit</Button>
+    </StackPanel>
+    <StackPanel x:Name="hbox7" Orientation="Horizontal" Spacing="5">
+      <TextBlock x:Name="label_splash_progress" Width="400">Ready</TextBlock>
+      <ProgressBar x:Name="progressbar_splash" Height="10"></ProgressBar>
     </StackPanel>
   </StackPanel>
 </Window>

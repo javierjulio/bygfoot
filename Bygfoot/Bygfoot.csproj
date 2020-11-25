@@ -4,20 +4,13 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="App.xaml" />
-    <None Remove="MainWindow.xaml" />
-    <None Remove="pixmaps\bygfoot_splash.png" />
-    <None Remove="SplashWindow.xaml" />
-    <None Remove="StartupWindow.xaml" />
+    <None Remove="*.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <AvaloniaXaml Include="App.xaml" />
-    <AvaloniaXaml Include="MainWindow.xaml" />
-    <AvaloniaXaml Include="SplashWindow.xaml" />
-    <AvaloniaXaml Include="StartupWindow.xaml" />
+    <AvaloniaXaml Include="*.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="pixmaps\bygfoot_splash.png" />
+    <AvaloniaResource Include="Assets\*"/>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.9.12" />
