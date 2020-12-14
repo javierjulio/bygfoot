@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="660" d:DesignHeight="500"
         x:Class="Bygfoot.SplashWindow"
-        Title="AvaloniaAppTemplate"
+        Title="Bygfoot"
         Padding="5" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight">
   <StackPanel x:Name="vbox2" Orientation="Vertical" Spacing="3">
     <TabControl x:Name="notebook1">

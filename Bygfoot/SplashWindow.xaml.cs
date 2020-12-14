@@ -1,5 +1,6 @@
 ﻿namespace Bygfoot
 {
+    using System;
     using System.ComponentModel;
     using Avalonia;
     using Avalonia.Controls;
@@ -50,6 +51,8 @@
         public void NextButtonClicked() => HintText = hintProvider.GetHint(currentHintNumber++);
 
         public void PrevButtonClicked() => HintText = hintProvider.GetHint(currentHintNumber--);
+
+        public void QuitButtonClicked() => Environment.Exit(0);
     }
 
     public interface IHintProvider
