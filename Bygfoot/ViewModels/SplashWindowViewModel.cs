@@ -1,5 +1,6 @@
 namespace Bygfoot.ViewModels
 {
+    using System;
     using System.ComponentModel;
 
     public class SplashWindowViewModel : ViewModelBase, INotifyPropertyChanged
@@ -30,6 +31,8 @@ namespace Bygfoot.ViewModels
         public void NextButtonClicked() => HintText = hintProvider.GetHint(currentHintNumber++);
 
         public void PrevButtonClicked() => HintText = hintProvider.GetHint(currentHintNumber--);
+
+        public void QuitButtonClicked() => Environment.Exit(0);
     }
 
     public interface IHintProvider
