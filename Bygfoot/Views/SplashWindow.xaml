@@ -3,7 +3,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="660" d:DesignHeight="500"
-        x:Class="Bygfoot.SplashWindow"
+        xmlns:vm="clr-namespace:Bygfoot.ViewModels"
+        x:Class="Bygfoot.Views.SplashWindow"
         Title="AvaloniaAppTemplate"
         Padding="5" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight">
   <StackPanel x:Name="vbox2" Orientation="Vertical" Spacing="3">

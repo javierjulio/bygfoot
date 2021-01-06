@@ -4,13 +4,13 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="*.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AvaloniaXaml Include="*.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AvaloniaResource Include="Assets\*"/>
+    <Compile Update="**\*.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <AvaloniaResource Include="**\*.xaml">
+      <SubType>Designer</SubType>
+    </AvaloniaResource>
+    <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.9.12" />

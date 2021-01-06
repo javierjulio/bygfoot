@@ -1,28 +1,8 @@
-﻿namespace Bygfoot
+namespace Bygfoot.ViewModels
 {
     using System.ComponentModel;
-    using Avalonia;
-    using Avalonia.Controls;
-    using Avalonia.Markup.Xaml;
 
-    public class SplashWindow : Window
-    {
-        public SplashWindow()
-        {
-            InitializeComponent();
-#if DEBUG
-            this.AttachDevTools();
-#endif
-            DataContext = new SplashWindowViewModel();
-        }
-
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
-    }
-
-    public class SplashWindowViewModel : INotifyPropertyChanged
+    public class SplashWindowViewModel : ViewModelBase, INotifyPropertyChanged
     {
         private readonly IHintProvider hintProvider;
         private string currentHint;

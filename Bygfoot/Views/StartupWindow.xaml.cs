@@ -1,6 +1,5 @@
-﻿namespace Bygfoot
+﻿namespace Bygfoot.Views
 {
-    using System.ComponentModel;
     using Avalonia;
     using Avalonia.Controls;
     using Avalonia.Markup.Xaml;
@@ -13,21 +12,11 @@
 #if DEBUG
             this.AttachDevTools();
 #endif
-            DataContext = new StartupWindowViewModel();
         }
 
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
         }
-    }
-
-    public class StartupWindowViewModel : INotifyPropertyChanged
-    {
-        public StartupWindowViewModel()
-        {
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
